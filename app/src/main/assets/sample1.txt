@@ -1,0 +1,982 @@
+[
+    {
+      "text": "Be careful driving.",
+      "text_translate": "Lái xe cẩn thận.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/beCarefulDriving.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/beCarefulDriving.mp3",
+      "idp": 0
+    },
+    {
+      "text": "Be careful.",
+      "text_translate": "Hãy cẩn thận.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/beCareful.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/beCareful.mp3",
+      "idp": 1
+    },
+    {
+      "text": "Can you translate this for me?",
+      "text_translate": "Bạn có thể dịch cho tôi cái này được không?",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/canYouTranslateThisForMe.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/canYouTranslateThisForMe.mp3",
+      "idp": 2
+    },
+    {
+      "text": "Chicago is very different from Boston.",
+      "text_translate": "Chicago rất khác Boston.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/chicagoIsVeryDifferentFromBoston.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/chicagoIsVeryDifferentFromBoston.mp3",
+      "idp": 3
+    },
+    {
+      "text": "Don't worry.",
+      "text_translate": "Đừng lo.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/dontWorry.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/dontWorry.mp3",
+      "idp": 4
+    },
+    {
+      "text": "Everyone knows it.",
+      "text_translate": "Mọi người biết điều đó.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/everyoneKnowsIt.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/everyoneKnowsIt.mp3",
+      "idp": 5
+    },
+    {
+      "text": "Everything is ready.",
+      "text_translate": "Mọi thứ đã sẵn sàng.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/everythingIsReady.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/everythingIsReady.mp3",
+      "idp": 6
+    },
+    {
+      "text": "Excellent.",
+      "text_translate": "Xuất sắc.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/excellent.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/excellent.mp3",
+      "idp": 7
+    },
+    {
+      "text": "From time to time.",
+      "text_translate": "Thỉnh thoảng.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/fromTimeToTime.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/fromTimeToTime.mp3",
+      "idp": 8
+    },
+    {
+      "text": "Good idea.",
+      "text_translate": "Ý kiến hay.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/goodIdea.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/goodIdea.mp3",
+      "idp": 9
+    },
+    {
+      "text": "He likes it very much.",
+      "text_translate": "Anh ta thích nó lắm.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/heLikesItVeryMuch.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/heLikesItVeryMuch.mp3",
+      "idp": 10
+    },
+    {
+      "text": "Help!",
+      "text_translate": "Giúp tôi!",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/help.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/help.mp3",
+      "idp": 11
+    },
+    {
+      "text": "He's coming soon.",
+      "text_translate": "Anh ta sắp tới.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/hesComingSoon.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/hesComingSoon.mp3",
+      "idp": 12
+    },
+    {
+      "text": "He's right.",
+      "text_translate": "Anh ta đúng.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/hesRight.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/hesRight.mp3",
+      "idp": 13
+    },
+    {
+      "text": "He's very annoying.",
+      "text_translate": "Anh ta quấy rối quá.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/hesVeryAnnoying.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/hesVeryAnnoying.mp3",
+      "idp": 14
+    },
+    {
+      "text": "He's very famous.",
+      "text_translate": "Anh ta rất nổi tiếng.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/hesVeryFamous.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/hesVeryFamous.mp3",
+      "idp": 15
+    },
+    {
+      "text": "How are you?",
+      "text_translate": "Bạn khỏe không?",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/howAreYou.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/howAreYou.mp3",
+      "idp": 16
+    },
+    {
+      "text": "How's work going?",
+      "text_translate": "Việc làm thế nào?",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/howsWorkGoing.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/howsWorkGoing.mp3",
+      "idp": 17
+    },
+    {
+      "text": "Hurry!",
+      "text_translate": "Nhanh lên!",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/hurry.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/hurry.mp3",
+      "idp": 18
+    },
+    {
+      "text": "I ate already.",
+      "text_translate": "Tôi đã ăn rồi.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/iAteAlready.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/iAteAlready.mp3",
+      "idp": 19
+    },
+    {
+      "text": "I can't hear you.",
+      "text_translate": "Tôi không thể nghe bạn nói.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/iCantHearYou.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/iCantHearYou.mp3",
+      "idp": 20
+    },
+    {
+      "text": "I don't know how to use it.",
+      "text_translate": "Tôi không biết cách dùng nó.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/iDontKnowHowToUseIt.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/iDontKnowHowToUseIt.mp3",
+      "idp": 21
+    },
+    {
+      "text": "I don't like him.",
+      "text_translate": "Tôi không thích anh ta.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/iDontLikeHim.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/iDontLikeHim.mp3",
+      "idp": 22
+    },
+    {
+      "text": "I don't like it.",
+      "text_translate": "Tôi không thích nó.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/iDontLikeIt.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/iDontLikeIt.mp3",
+      "idp": 23
+    },
+    {
+      "text": "I don't speak very well.",
+      "text_translate": "Tôi không nói giỏi lắm",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/iDontSpeakVeryWell.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/iDontSpeakVeryWell.mp3",
+      "idp": 24
+    },
+    {
+      "text": "I don't understand.",
+      "text_translate": "Tôi không hiểu.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/IDontUnderstand.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/IDontUnderstand.mp3",
+      "idp": 25
+    },
+    {
+      "text": "I don't want it.",
+      "text_translate": "Tôi không muốn nó.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/IDontWantIt.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/IDontWantIt.mp3",
+      "idp": 26
+    },
+    {
+      "text": "I don't want that.",
+      "text_translate": "Tôi không muốn cái đó.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/IDontWantThat.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/IDontWantThat.mp3",
+      "idp": 27
+    },
+    {
+      "text": "I don't want to bother you.",
+      "text_translate": "Tôi không muốn làm phiền bạn.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/IDontWantToBotherYou.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/IDontWantToBotherYou.mp3",
+      "idp": 28
+    },
+    {
+      "text": "I feel good.",
+      "text_translate": "Tôi cảm thấy khỏe.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/IFeelGood.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/IFeelGood.mp3",
+      "idp": 29
+    },
+    {
+      "text": "I get off of work at 6.",
+      "text_translate": "Tôi xong việc lúc 6 giờ.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/IGetOffWorkAt6.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/IGetOffWorkAt6.mp3",
+      "idp": 30
+    },
+    {
+      "text": "I have a headache.",
+      "text_translate": "Tôi bị nhức đầu.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/IHaveAHeadache.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/IHaveAHeadache.mp3",
+      "idp": 31
+    },
+    {
+      "text": "I hope you and your wife have a nice trip.",
+      "text_translate": "Tôi hy vọng bạn và vợ bạn có một chuyến đi thú vị.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/IHopeYouAndYourWifeHaveANiceTrip.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/IHopeYouAndYourWifeHaveANiceTrip.mp3",
+      "idp": 32
+    },
+    {
+      "text": "I know.",
+      "text_translate": "Tôi biết.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/IKnow.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/IKnow.mp3",
+      "idp": 33
+    },
+    {
+      "text": "I like her.",
+      "text_translate": "Tôi thích cô ta.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/ILikeHer.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/ILikeHer.mp3",
+      "idp": 34
+    },
+    {
+      "text": "I lost my watch.",
+      "text_translate": "Tôi bị mất đồng hồ.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/ILostMyWatch.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/ILostMyWatch.mp3",
+      "idp": 35
+    },
+    {
+      "text": "I love you.",
+      "text_translate": "Tôi yêu bạn.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/ILoveYou.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/ILoveYou.mp3",
+      "idp": 36
+    },
+    {
+      "text": "I need to change clothes.",
+      "text_translate": "Tôi cần thay quần áo.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/INeedToChangeClothes.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/INeedToChangeClothes.mp3",
+      "idp": 37
+    },
+    {
+      "text": "I need to go home.",
+      "text_translate": "Tôi cần về nhà.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/INeedToGoHome.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/INeedToGoHome.mp3",
+      "idp": 38
+    },
+    {
+      "text": "I only want a snack.",
+      "text_translate": "Tôi chỉ cần món ăn nhẹ.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/IOnlyWantASnack.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/IOnlyWantASnack.mp3",
+      "idp": 39
+    },
+    {
+      "text": "I think it tastes good.",
+      "text_translate": "Tôi nghĩ nó ngon.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/IThinkItTastesGood.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/IThinkItTastesGood.mp3",
+      "idp": 40
+    },
+    {
+      "text": "I think it's very good.",
+      "text_translate": "Tôi nghĩ nó rất tốt.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/IThinkItsVeryGood.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/IThinkItsVeryGood.mp3",
+      "idp": 41
+    },
+    {
+      "text": "I thought the clothes were cheaper.",
+      "text_translate": "Tôi nghĩ quần áo rẻ hơn.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/IThoughtTheClothesWereCheaper.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/IThoughtTheClothesWereCheaper.mp3",
+      "idp": 42
+    },
+    {
+      "text": "I was about to leave the restaurant when my friends arrived.",
+      "text_translate": "Tôi sắp rời nhà hàng khi những người bạn của tôi tới.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/IWasAboutToLeaveTheRestaurantWhenMyFriendsArrived.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/IWasAboutToLeaveTheRestaurantWhenMyFriendsArrived.mp3",
+      "idp": 43
+    },
+    {
+      "text": "I'd like to go for a walk.",
+      "text_translate": "Tôi muốn đi dạo.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/IdLikeToGoForAWalk.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/IdLikeToGoForAWalk.mp3",
+      "idp": 44
+    },
+    {
+      "text": "If you need my help, please let me know.",
+      "text_translate": "Nếu bạn cần tôi giúp đỡ, làm ơn cho tôi biết.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/ifYouNeedMyHelpPleaseLetMeKnow.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/ifYouNeedMyHelpPleaseLetMeKnow.mp3",
+      "idp": 45
+    },
+    {
+      "text": "I'll call you when I leave.",
+      "text_translate": "Tôi sẽ gọi bạn khi tôi ra đi.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/illCallYouWhenILeave.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/illCallYouWhenILeave.mp3",
+      "idp": 46
+    },
+    {
+      "text": "I'll come back later.",
+      "text_translate": "Tôi sẽ trở lại sau.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/illComeBackLater.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/illComeBackLater.mp3",
+      "idp": 47
+    },
+    {
+      "text": "I'll pay.",
+      "text_translate": "Tôi sẽ trả.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/illPay.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/illPay.mp3",
+      "idp": 48
+    },
+    {
+      "text": "I'll take it.",
+      "text_translate": "Tôi sẽ mua nó.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/illTakeIt.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/illTakeIt.mp3",
+      "idp": 49
+    },
+    {
+      "text": "I'll take you to the bus stop.",
+      "text_translate": "Tôi sẽ đưa bạn tới trạm xe buýt.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/illTakeYouToTheBusStop.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/illTakeYouToTheBusStop.mp3",
+      "idp": 50
+    },
+    {
+      "text": "I'm an American.",
+      "text_translate": "Tôi là một người Mỹ.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/imAnAmerican.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/imAnAmerican.mp3",
+      "idp": 51
+    },
+    {
+      "text": "I'm cleaning my room.",
+      "text_translate": "Tôi đang lau chùi phòng.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/imCleaningMyRoom.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/imCleaningMyRoom.mp3",
+      "idp": 52
+    },
+    {
+      "text": "I'm cold.",
+      "text_translate": "Tôi lạnh.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/imCold.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/imCold.mp3",
+      "idp": 53
+    },
+    {
+      "text": "I'm coming to pick you up.",
+      "text_translate": "Tôi đang tới đón bạn.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/imComingToPickYouUp.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/imComingToPickYouUp.mp3",
+      "idp": 54
+    },
+    {
+      "text": "I'm going to leave.",
+      "text_translate": "Tôi sắp đi.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/ImGoingToLeave.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/ImGoingToLeave.mp3",
+      "idp": 55
+    },
+    {
+      "text": "I'm good, and you?",
+      "text_translate": "Tôi khỏe, còn bạn?",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/ImGoodAndYou.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/ImGoodAndYou.mp3",
+      "idp": 56
+    },
+    {
+      "text": "I'm happy.",
+      "text_translate": "Tôi vui.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/ImHappy.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/ImHappy.mp3",
+      "idp": 57
+    },
+    {
+      "text": "I'm hungry.",
+      "text_translate": "Tôi đói.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/ImHungry.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/ImHungry.mp3",
+      "idp": 58
+    },
+    {
+      "text": "I'm married.",
+      "text_translate": "Tôi có gia đình.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/ImMarried.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/ImMarried.mp3",
+      "idp": 59
+    },
+    {
+      "text": "I'm not busy.",
+      "text_translate": "Tôi không bận.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/ImNotBusy.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/ImNotBusy.mp3",
+      "idp": 60
+    },
+    {
+      "text": "I'm not married.",
+      "text_translate": "Tôi không có gia đình.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/ImNotMarried.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/ImNotMarried.mp3",
+      "idp": 61
+    },
+    {
+      "text": "I'm not ready yet.",
+      "text_translate": "Tôi chưa sẵn sàng.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/ImNotReadyYet.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/ImNotReadyYet.mp3",
+      "idp": 62
+    },
+    {
+      "text": "I'm not sure.",
+      "text_translate": "Tôi không chắc.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/ImNotSure.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/ImNotSure.mp3",
+      "idp": 63
+    },
+    {
+      "text": "I'm sorry, we're sold out.",
+      "text_translate": "Tôi rất tiếc, chúng tôi hết hàng.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/ImSorryWereSoldOut.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/ImSorryWereSoldOut.mp3",
+      "idp": 64
+    },
+    {
+      "text": "I'm thirsty.",
+      "text_translate": "Tôi khát.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/ImThirsty.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/ImThirsty.mp3",
+      "idp": 65
+    },
+    {
+      "text": "I'm very busy. I don't have time now.",
+      "text_translate": "Tôi rất bận. Bây giờ tôi không có thời gian.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/ImVeryBusyIDontHaveTimeNow.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/ImVeryBusyIDontHaveTimeNow.mp3",
+      "idp": 66
+    },
+    {
+      "text": "Is Mr. Smith an American?",
+      "text_translate": "Ông Smith có phải là người Mỹ không?",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/isMrSmithAnAmerican.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/isMrSmithAnAmerican.mp3",
+      "idp": 67
+    },
+    {
+      "text": "Is that enough?",
+      "text_translate": "Như vậy đủ không?",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/isThatEnough.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/isThatEnough.mp3",
+      "idp": 68
+    },
+    {
+      "text": "It's longer than 2 miles.",
+      "text_translate": "Nó dài hơn 2 dặm.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/itsLongerThan2Miles.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/itsLongerThan2Miles.mp3",
+      "idp": 69
+    },
+    {
+      "text": "I've been here for two days.",
+      "text_translate": "Tôi đã ở đây 2 ngày.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/IveBeenHereFor2Days.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/IveBeenHereFor2Days.mp3",
+      "idp": 70
+    },
+    {
+      "text": "I've heard Texas is a beautiful place.",
+      "text_translate": "Tôi đã nghe Texas là một nơi đẹp.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/IveHeardTexasIsABeautifulPlace.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/IveHeardTexasIsABeautifulPlace.mp3",
+      "idp": 71
+    },
+    {
+      "text": "I've never seen that before.",
+      "text_translate": "Tôi chưa bao giờ thấy cái đó trước đây.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/IveNeverSeenThatBefore.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/IveNeverSeenThatBefore.mp3",
+      "idp": 72
+    },
+    {
+      "text": "Just a little.",
+      "text_translate": "Một ít thôi.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/justALittle.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/justALittle.mp3",
+      "idp": 73
+    },
+    {
+      "text": "Just a moment.",
+      "text_translate": "Chờ một chút.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/justAMoment.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/justAMoment.mp3",
+      "idp": 74
+    },
+    {
+      "text": "Let me check.",
+      "text_translate": "Để tôi kiểm tra.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/letMeCheck.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/letMeCheck.mp3",
+      "idp": 75
+    },
+    {
+      "text": "Let me think about it.",
+      "text_translate": "Để tôi suy nghĩ về việc đó.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/letMeThinkAboutIt.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/letMeThinkAboutIt.mp3",
+      "idp": 76
+    },
+    {
+      "text": "Let's go have a look.",
+      "text_translate": "Chúng ta hãy đi xem.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/letsGoHaveALook.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/letsGoHaveALook.mp3",
+      "idp": 77
+    },
+    {
+      "text": "Let's practice English.",
+      "text_translate": "Chúng ta hãy thực hành tiếng Anh.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/letsPracticeEnglish.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/letsPracticeEnglish.mp3",
+      "idp": 78
+    },
+    {
+      "text": "May I speak to Mrs. Smith please?",
+      "text_translate": "Tôi có thể nói với bà Smith không, xin vui lòng?",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/mayISpeakToMrsSmithPlease.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/mayISpeakToMrsSmithPlease.mp3",
+      "idp": 79
+    },
+    {
+      "text": "More than that.",
+      "text_translate": "Hơn thế.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/moreThanThat.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/moreThanThat.mp3",
+      "idp": 80
+    },
+    {
+      "text": "Never mind.",
+      "text_translate": "Đừng bận tâm.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/nevermind.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/nevermind.mp3",
+      "idp": 81
+    },
+    {
+      "text": "Next time.",
+      "text_translate": "Kỳ tới.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/nextTime.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/nextTime.mp3",
+      "idp": 82
+    },
+    {
+      "text": "No, thank you.",
+      "text_translate": "Không, cám ơn.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/noThankYou.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/noThankYou.mp3",
+      "idp": 83
+    },
+    {
+      "text": "No.",
+      "text_translate": "Không.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/no.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/no.mp3",
+      "idp": 84
+    },
+    {
+      "text": "Nonsense.",
+      "text_translate": "Vô lý.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/nonsense.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/nonsense.mp3",
+      "idp": 85
+    },
+    {
+      "text": "Not recently.",
+      "text_translate": "Không phải lúc gần đây.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/notRecently.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/notRecently.mp3",
+      "idp": 86
+    },
+    {
+      "text": "Not yet.",
+      "text_translate": "Chưa.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/notYet.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/notYet.mp3",
+      "idp": 87
+    },
+    {
+      "text": "Nothing else.",
+      "text_translate": "Không còn gì khác.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/nothingElse.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/nothingElse.mp3",
+      "idp": 88
+    },
+    {
+      "text": "Of course.",
+      "text_translate": "Dĩ nhiên.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/ofCourse.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/ofCourse.mp3",
+      "idp": 89
+    },
+    {
+      "text": "Okay.",
+      "text_translate": "Được.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/ok.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/ok.mp3",
+      "idp": 90
+    },
+    {
+      "text": "Please fill out this form.",
+      "text_translate": "Làm ơn điền vào đơn này.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/pleaseFillOutThisForm.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/pleaseFillOutThisForm.mp3",
+      "idp": 91
+    },
+    {
+      "text": "Please take me to this address.",
+      "text_translate": "Làm ơn đưa tôi tới địa chỉ này.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/pleaseTakeMeToThisAddress.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/pleaseTakeMeToThisAddress.mp3",
+      "idp": 92
+    },
+    {
+      "text": "Please write it down.",
+      "text_translate": "Làm ơn viết ra giấy.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/pleaseWriteItDown.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/pleaseWriteItDown.mp3",
+      "idp": 93
+    },
+    {
+      "text": "Really?",
+      "text_translate": "Thực sao?",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/really.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/really.mp3",
+      "idp": 94
+    },
+    {
+      "text": "Right here.",
+      "text_translate": "Ngay đây.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/rightHere.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/rightHere.mp3",
+      "idp": 95
+    },
+    {
+      "text": "Right there.",
+      "text_translate": "Ngay đó.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/rightThere.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/rightThere.mp3",
+      "idp": 96
+    },
+    {
+      "text": "See you later.",
+      "text_translate": "Gặp bạn sau.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/seeYouLater.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/seeYouLater.mp3",
+      "idp": 97
+    },
+    {
+      "text": "See you tomorrow.",
+      "text_translate": "Gặp bạn ngày mai.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/seeYouTomorrow.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/seeYouTomorrow.mp3",
+      "idp": 98
+    },
+    {
+      "text": "See you tonight.",
+      "text_translate": "Gặp bạn tối nay.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/seeYouTonight.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/seeYouTonight.mp3",
+      "idp": 99
+    },
+    {
+      "text": "She's pretty.",
+      "text_translate": "Cô ta đẹp.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/shesPretty.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/shesPretty.mp3",
+      "idp": 100
+    },
+    {
+      "text": "Sorry to bother you.",
+      "text_translate": "Xin lỗi làm phiền bạn.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/sorryToBotherYou.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/sorryToBotherYou.mp3",
+      "idp": 101
+    },
+    {
+      "text": "Stop!",
+      "text_translate": "Dừng lại!",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/stop.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/stop.mp3",
+      "idp": 102
+    },
+    {
+      "text": "Take a chance.",
+      "text_translate": "Thử vận may.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/takeAChance.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/takeAChance.mp3",
+      "idp": 103
+    },
+    {
+      "text": "Take it outside.",
+      "text_translate": "Mang nó ra ngoài.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/takeItOutside.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/takeItOutside.mp3",
+      "idp": 104
+    },
+    {
+      "text": "Tell me.",
+      "text_translate": "Nói với tôi.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/tellMe.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/tellMe.mp3",
+      "idp": 105
+    },
+    {
+      "text": "Thank you miss.",
+      "text_translate": "Cám ơn cô.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/thankYouMiss.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/thankYouMiss.mp3",
+      "idp": 106
+    },
+    {
+      "text": "Thank you sir.",
+      "text_translate": "Cám ơn ông.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/thankYouSir.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/thankYouSir.mp3",
+      "idp": 107
+    },
+    {
+      "text": "Thank you very much.",
+      "text_translate": "Cám ơn rất nhiều.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/thankYouVeryMuch.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/thankYouVeryMuch.mp3",
+      "idp": 108
+    },
+    {
+      "text": "Thank you.",
+      "text_translate": "Cám ơn.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/thankYou.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/thankYou.mp3",
+      "idp": 109
+    },
+    {
+      "text": "Thanks for everything.",
+      "text_translate": "Cám ơn về mọi việc.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/thanksForEverything.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/thanksForEverything.mp3",
+      "idp": 110
+    },
+    {
+      "text": "Thanks for your help.",
+      "text_translate": "Cám ơn về sự giúp đỡ của bạn.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/thanksForYourHelp.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/thanksForYourHelp.mp3",
+      "idp": 111
+    },
+    {
+      "text": "That looks great.",
+      "text_translate": "Cái đó trông tuyệt.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/thatLooksGreat.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/thatLooksGreat.mp3",
+      "idp": 112
+    },
+    {
+      "text": "That smells bad.",
+      "text_translate": "Cái đó ngửi hôi.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/thatSmellsBad.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/thatSmellsBad.mp3",
+      "idp": 113
+    },
+    {
+      "text": "That's alright.",
+      "text_translate": "Được thôi.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/thatsAlright.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/thatsAlright.mp3",
+      "idp": 114
+    },
+    {
+      "text": "That's enough.",
+      "text_translate": "Như vậy đủ rồi.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/thatsEnough.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/thatsEnough.mp3",
+      "idp": 115
+    },
+    {
+      "text": "That's fine.",
+      "text_translate": "Như vậy tốt rồi.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/thatsFine.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/thatsFine.mp3",
+      "idp": 116
+    },
+    {
+      "text": "That's it.",
+      "text_translate": "Như vậy đó.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/thatsIt.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/thatsIt.mp3",
+      "idp": 117
+    },
+    {
+      "text": "That's not fair.",
+      "text_translate": "Như vậy không công bằng.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/thatsNotFair.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/thatsNotFair.mp3",
+      "idp": 118
+    },
+    {
+      "text": "That's not right.",
+      "text_translate": "Như vậy không đúng.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/thatsNotRight.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/thatsNotRight.mp3",
+      "idp": 119
+    },
+    {
+      "text": "That's right.",
+      "text_translate": "Đúng rồi.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/thatsRight.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/thatsRight.mp3",
+      "idp": 120
+    },
+    {
+      "text": "That's too bad.",
+      "text_translate": "Như vậy quá tệ.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/thatsTooBad.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/thatsTooBad.mp3",
+      "idp": 121
+    },
+    {
+      "text": "That's too many.",
+      "text_translate": "Như vậy nhiều quá.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/thatsTooMany.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/thatsTooMany.mp3",
+      "idp": 122
+    },
+    {
+      "text": "That's too much.",
+      "text_translate": "Như vậy nhiều quá.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/thatsTooMuch.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/thatsTooMuch.mp3",
+      "idp": 123
+    },
+    {
+      "text": "The book is under the table.",
+      "text_translate": "Quyển sách ở dưới cái bàn.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/theBookIsUnderTheTable.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/theBookIsUnderTheTable.mp3",
+      "idp": 124
+    },
+    {
+      "text": "They'll be right back.",
+      "text_translate": "Họ sẽ trở lại ngay.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/theyllBeRightBack.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/theyllBeRightBack.mp3",
+      "idp": 125
+    },
+    {
+      "text": "They're the same.",
+      "text_translate": "Chúng giống nhau.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/theyreTheSame.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/theyreTheSame.mp3",
+      "idp": 126
+    },
+    {
+      "text": "They're very busy.",
+      "text_translate": "Họ rất bận.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/theyreVeryBusy.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/theyreVeryBusy.mp3",
+      "idp": 127
+    },
+    {
+      "text": "This doesn't work.",
+      "text_translate": "Cái này không hoạt động.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/thisDoesntWork.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/thisDoesntWork.mp3",
+      "idp": 128
+    },
+    {
+      "text": "This is very difficult.",
+      "text_translate": "Cái này rất khó.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/thisIsVeryDifficult.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/thisIsVeryDifficult.mp3",
+      "idp": 129
+    },
+    {
+      "text": "This is very important.",
+      "text_translate": "Điều này rất quan trọng.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/thisIsVeryImportant.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/thisIsVeryImportant.mp3",
+      "idp": 130
+    },
+    {
+      "text": "Try it.",
+      "text_translate": "Thử nó.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/tryIt.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/tryIt.mp3",
+      "idp": 131
+    },
+    {
+      "text": "Very good, thanks.",
+      "text_translate": "Rất tốt, cám ơn.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/veryGoodThanks.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/veryGoodThanks.mp3",
+      "idp": 132
+    },
+    {
+      "text": "We like it very much.",
+      "text_translate": "Chúng tôi thích nó lắm.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/weLikeItVeryMuch.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/weLikeItVeryMuch.mp3",
+      "idp": 133
+    },
+    {
+      "text": "Would you take a message please?",
+      "text_translate": "Bạn nhận giùm một tin nhắn được không?",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/wouldYouMakeAMessagePlease.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/wouldYouMakeAMessagePlease.mp3",
+      "idp": 134
+    },
+    {
+      "text": "Yes, really.",
+      "text_translate": "Vâng, thực sự.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/yesReally.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/yesReally.mp3",
+      "idp": 135
+    },
+    {
+      "text": "Your things are all here.",
+      "text_translate": "Tất cả đồ của bạn ở đây.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/youreThingsAreAllThere.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/youreThingsAreAllThere.mp3",
+      "idp": 136
+    },
+    {
+      "text": "You're beautiful.",
+      "text_translate": "Bạn đẹp.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/youreBeautiful.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/youreBeautiful.mp3",
+      "idp": 137
+    },
+    {
+      "text": "You're very nice.",
+      "text_translate": "Bạn rất dễ thương.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/youreVeryNice.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/youreVeryNice.mp3",
+      "idp": 138
+    },
+    {
+      "text": "You're very smart.",
+      "text_translate": "Bạn rất thông minh.",
+      "normal_audio": "http://s1.yobimind.com/english_speak/phrases/mp3/youreVerySmart.mp3",
+      "slow_audio": "http://s1.yobimind.com/english_speak/phrases/slow/youreVerySmart.mp3",
+      "idp": 139
+    }
+  ]

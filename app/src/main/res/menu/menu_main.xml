@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/ic_android">
+    <group android:enabled="true">
+        <item
+            android:id="@+id/mnMore"
+            android:title="More great app" />
+        <item
+            android:id="@+id/mnProgress"
+            android:title="Progress" />
+        <item
+            android:id="@+id/mnReport"
+            android:title="Report a bug" />
+        <item
+            android:id="@+id/mnSettings"
+            android:title="Settings" />
+        <item
+            android:id="@+id/mnAbout"
+            android:summary="English Grammar Test"
+            android:title="About" />
+    </group>
+</menu>

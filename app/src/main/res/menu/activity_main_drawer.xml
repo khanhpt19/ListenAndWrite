@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Best English Apps">
+        <menu>
+            <item
+                android:id="@+id/nav_listening"
+                android:icon="@drawable/listening"
+                android:title="Learn English Listening" />
+            <item
+                android:id="@+id/nav_letlearn"
+                android:icon="@drawable/letlearn"
+                android:title="Let's Learn English" />
+            <item
+                android:id="@+id/nav_chat"
+                android:icon="@drawable/chat"
+                android:title="Learn English by Chatting" />
+        </menu>
+    </item>
+
+    <item android:title="About">
+        <menu>
+            <item
+                android:id="@+id/nav_rate"
+                android:icon="@drawable/ic_like"
+                android:title="Rate me" />
+            <item
+                android:id="@+id/nav_application"
+                android:icon="@drawable/ic_android"
+                android:title="Yobimi applications" />
+            <item
+                android:id="@+id/nav_follow"
+                android:icon="@drawable/face1"
+                android:title="Follow us" />
+        </menu>
+    </item>
+
+</menu>
