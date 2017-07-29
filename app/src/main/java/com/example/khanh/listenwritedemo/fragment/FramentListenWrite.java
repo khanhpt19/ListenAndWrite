@@ -7,6 +7,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
@@ -29,6 +30,8 @@ import java.util.List;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by khanh on 7/18/2017.
  */
@@ -48,19 +51,20 @@ public class FramentListenWrite extends FragmentBase {
     RippleBackground ripple;
     @InjectView(R.id.tv_hint)
     TextView tvhint;
+    @InjectView(R.id.txtShowResult)
+    TextView txtShowResult;
     private MyFragmentPagerAdapter myFragmentPagerAdapter;
     private ArrayList<Fragment> listFragment = new ArrayList<>();
 
     SharedPreferences sharedpreferences;
     public static final int MyPREFERENCES = 0;
-    public static final List<Integer> MyPREFERENCES1 = new ArrayList<>();
-
+    ArrayList<Integer>mcorrects=new ArrayList<>();
     int index;
     Section section;
     @InjectView(R.id.txtAnswer)
     EditText txtAnswer;
     Handler mHandler = new Handler();
-    int ncorrects = 0, nmistakes = 0;
+    int ncorrects = 0, nmistakes = 0,k;
 
     List<String> acorrects= new ArrayList<>();
     List<String>amistakes= new ArrayList<>();
@@ -77,6 +81,8 @@ public class FramentListenWrite extends FragmentBase {
             @Override
             public void onClick(View v) {
                 mainActivity.onBackPressed();
+                mainActivity.onOpenFragment(FragmentResult.newInstance(acorrects, amistakes), true);
+
             }
         });
         loadList();
@@ -128,10 +134,16 @@ public class FramentListenWrite extends FragmentBase {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
     }
-
+    public void share(){
+        sharedpreferences = getContext().getSharedPreferences(String.valueOf(MyPREFERENCES),MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putInt("index", index);
+        editor.putInt("corrects_" + index, ncorrects);
+        editor.commit();
+    }
     @OnClick({R.id.btnNext, R.id.btnHelp, R.id.imgHinh, R.id.txtAnswer})
     public void onClick(View v) {
-        int k = viewpager.getCurrentItem();
+        k = viewpager.getCurrentItem();
 
         if (v.getId() == R.id.imgHinh) {
             try {
@@ -158,7 +170,7 @@ public class FramentListenWrite extends FragmentBase {
         }
 
         if (v.getId() == R.id.btnHelp) {
-            tvhint.setText(section.getPhrases().get(k).getText_translate().toString());
+            tvhint.setText(section.getPhrases().get(k).getText().toString());
             AnimHelper.reveal(btnHelp, tvhint, tvhint.getWidth());
             btnHelp.setVisibility(View.GONE);
             mHandler.postDelayed(new Runnable() {
@@ -174,32 +186,40 @@ public class FramentListenWrite extends FragmentBase {
 
         String a = txtAnswer.getText().toString();
         String b = section.getPhrases().get(k).getText().toString();
+
         if (v.getId() == R.id.btnNext) {
             if (b.contains(".") || b.contains(",") || b.contains("?") || b.contains(";")|| b.contains("!")) {
                 if (a.toUpperCase().equalsIgnoreCase(b.substring(0, b.length() - 1).toUpperCase())) {
                     ncorrects++;
                     acorrects.add(b);
+                    txtShowResult.setText(txtAnswer.getText().toString());
+                    txtShowResult.setTextColor(getResources().getColor(R.color.colorGreen));
                 } else {
                     nmistakes++;
                     amistakes.add(b);
+                    txtShowResult.setText(section.getPhrases().get(k).getText().toString());
+                    txtShowResult.setTextColor(getResources().getColor(R.color.colorRed));
                 }
             } else {
                 if (a.toUpperCase().equalsIgnoreCase(b.toUpperCase())) {
                     ncorrects++;
                     acorrects.add(b);
+                    txtShowResult.setText(txtAnswer.getText().toString());
+                    txtShowResult.setTextColor(getResources().getColor(R.color.colorGreen));
                 } else {
                     nmistakes++;
                     amistakes.add(b);
+                    txtShowResult.setText(section.getPhrases().get(k).getText().toString());
+                    txtShowResult.setTextColor(getResources().getColor(R.color.colorRed));
                 }
             }
-
             new Thread(new Runnable() {
                 public void run() {
                     while (ncorrects < section.getPhrases().size()) {
                         mHandler.post(new Runnable() {
                             public void run() {
                                 progressbar.setProgress(ncorrects + nmistakes);
-                                txtNumCorrects.setText((ncorrects + nmistakes) + "/" + section.getPhrases().size());
+                                txtNumCorrects.setText((ncorrects) + "/" + section.getPhrases().size());
                             }
                         });
                         try {
@@ -213,13 +233,7 @@ public class FramentListenWrite extends FragmentBase {
 
             if (k == section.getPhrases().size() - 1) {
                 mainActivity.onOpenFragment(FragmentResult.newInstance(acorrects, amistakes), true);
-
-                sharedpreferences = getContext().getSharedPreferences(String.valueOf(MyPREFERENCES), Context.MODE_APPEND);
-                SharedPreferences.Editor editor = sharedpreferences.edit();
-                editor.putInt("indexs", index);
-                section.setCorrects(ncorrects);
-                editor.putInt("corrects", section.getCorrects());
-                editor.commit();
+                share();
             }
 
             viewpager.setCurrentItem(k + 1);
@@ -241,8 +255,10 @@ public class FramentListenWrite extends FragmentBase {
             } catch (Exception e) {
                 System.out.println(e.toString());
             }
+
         }
     }
+
 
     private boolean isAlive() {
         return getActivity() != null;

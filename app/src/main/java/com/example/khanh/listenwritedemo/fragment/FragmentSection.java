@@ -25,7 +25,7 @@ import java.util.List;
 
 import butterknife.InjectView;
 
-import static com.example.khanh.listenwritedemo.fragment.FramentListenWrite.MyPREFERENCES;
+import static com.example.khanh.listenwritedemo.fragment.FragmentLanguage.PREFERENCES;
 
 /**
  * Created by khanh on 7/18/2017.
@@ -39,10 +39,10 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
     private SectionAdapter mAdapter;
     List<Section> sectionList = new ArrayList();
     String name = "";
-    String codenal = "en";
-    String language;
+    String codenal;
     @InjectView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
+    int dem=0;
 
     @Override
     protected void initDataDefault() {
@@ -58,13 +58,15 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
                 int id = item.getItemId();
                 if (id == R.id.mnMore) {
                     mainActivity.onOpenFragment(FragmentLanguage.newInstance(name), true);
+                    dem++;
                 }
                 return false;
             }
         });
-        SharedPreferences prefs = getContext().getSharedPreferences(String.valueOf(MyPREFERENCES), Context.MODE_APPEND);
-        codenal = prefs.getString("code", "");
-        language = prefs.getString("language", "");
+
+            SharedPreferences prefs1 = getContext().getSharedPreferences(String.valueOf(PREFERENCES), Context.MODE_PRIVATE);
+            codenal = prefs1.getString("code", "");
+
         loadData();
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -87,21 +89,19 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
     }
 
     private void loadData() {
-
-        TaskSection taskQuestion = new TaskSection(getContext(), codenal);
-        taskQuestion.request(new Response.Listener<ArrayList<Section>>() {
-            @Override
-            public void onResponse(ArrayList<Section> response) {
-                sectionList = response;
-                loadList();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-    }
+            TaskSection taskQuestion = new TaskSection(getContext(), codenal);
+            taskQuestion.request(new Response.Listener<ArrayList<Section>>() {
+                @Override
+                public void onResponse(ArrayList<Section> response) {
+                    sectionList = response;
+                    loadList();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                }
+            });
+        }
 
     @Override
     protected void initViews(View view) {

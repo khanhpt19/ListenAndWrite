@@ -4,5 +4,6 @@
         android:id="@+id/mnMore"
         android:title="Choose language"
         android:icon="@drawable/ic_android"
-        android:showAsAction="ifRoom" />
+        android:showAsAction="ifRoom"
+        />
 </menu>

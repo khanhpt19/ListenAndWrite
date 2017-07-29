@@ -23,6 +23,8 @@ import java.util.List;
 
 import butterknife.InjectView;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by Administrator on 7/27/2017.
  */
@@ -104,15 +106,13 @@ public class FragmentLanguage extends FragmentBase implements LanguageAdapter.Ca
 
     @Override
     public void OnClick(int index) {
-
         toast("Language: " + languagelist.get(index).getName().toString() + "");
-        spreferences = getContext().getSharedPreferences(String.valueOf(PREFERENCES), Context.MODE_APPEND);
-        SharedPreferences.Editor editor = spreferences.edit();
 
+        spreferences = getContext().getSharedPreferences(String.valueOf(PREFERENCES), MODE_PRIVATE);
+        SharedPreferences.Editor editor = spreferences.edit();
         editor.putString("code", languagelist.get(index).getCode().toString());
-        editor.putString("language", languagelist.get(index).getName().toString());
-        editor.apply();
         editor.commit();
+
         mainActivity.onOpenFragment(FragmentSection.newInstance(languagelist.get(index).getCode().toString()), true);
     }
 }

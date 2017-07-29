@@ -1,11 +1,13 @@
 package com.example.khanh.listenwritedemo;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.ApplicationErrorReport;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,8 +20,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
+//import com.example.khanh.listenwritedemo.adapter.ActivityBase;
+import com.example.khanh.listenwritedemo.adapter.AppUtils;
+import com.example.khanh.listenwritedemo.fragment.FragmentApplications;
+import com.example.khanh.listenwritedemo.fragment.FragmentFollow;
 import com.example.khanh.listenwritedemo.fragment.FragmentLanguage;
 import com.example.khanh.listenwritedemo.fragment.FragmentSection;
 
@@ -39,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Fragment curFragment;
     private String categoryCurrent;
 
+    int index;
     private static final String TAG = "MainActivity";
 
     @Override
@@ -50,13 +58,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
+//          full screen
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //StasusBar Color
-        if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colorBlue));
-        }
+//        if (Build.VERSION.SDK_INT >= 21) {
+//            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colorBlue));
+//        }
     }
 
     public void setUpToolbar(Toolbar toolbar) {
@@ -90,45 +99,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.nav_listening) {
-            try {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.yobimi.bbclearningenglish")));
-            } catch (android.content.ActivityNotFoundException anfe) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.yobimi.bbclearningenglish")));
-            }
+            AppUtils.openApp(MainActivity.this,"com.yobimi.bbclearningenglish");
         }else if (id == R.id.nav_chat) {
-            try {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.yobimi.chatenglish")));
-            } catch (android.content.ActivityNotFoundException anfe) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.yobimi.chatenglish")));
-            }
+            AppUtils.openApp(MainActivity.this,"com.yobimi.chatenglish");
         } else if (id == R.id.nav_letlearn) {
-            try {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.yobimi.voaletlearnenglish.englishgrammar.englishspeak")));
-            } catch (android.content.ActivityNotFoundException anfe) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.yobimi.voaletlearnenglish.englishgrammar.englishspeak")));
-            }
+            AppUtils.openApp(MainActivity.this,"com.yobimi.voaletlearnenglish.englishgrammar.englishspeak");
         } else if (id == R.id.nav_rate) {
-            final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
-            try {
-                //startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.yobimi.bbclearningenglish")));
-            } catch (android.content.ActivityNotFoundException anfe) {
-                //startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.yobimi.bbclearningenglish")));
-            }
+//            AppUtils.rateApp(MainActivity.this);
+            AppUtils.openApp(MainActivity.this,"com.yobimi.bbclearningenglish");
         } else if (id == R.id.nav_application) {
-            try {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/dev?id=6042401600798620557")));
-            } catch (android.content.ActivityNotFoundException anfe) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/dev?id=6042401600798620557")));
-            }
-
+            onOpenFragment(FragmentApplications.newInstance(index),true);
         } else if (id == R.id.nav_follow) {
-            try {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/learningenglish.yobimi/")));
-            } catch (android.content.ActivityNotFoundException anfe) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/learningenglish.yobimi/")));
-            }
+            onOpenFragment(FragmentFollow.newInstance(index),true);
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -172,33 +155,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    // Optional for press again to exit app
-    // @Override
-    // public void onBackPressed() {
-    //     FragmentManager fm = getSupportFragmentManager();
+//     Optional for press again to exit app
+     @Override
+     public void onBackPressed() {
+         FragmentManager fm = getSupportFragmentManager();
 
-    //     if (fm.getBackStackEntryCount() > 0) {
-    //         superBackPress();
-    //         return;
-    //     }
-    //     if (doubleBackToExitPressedOnce || fm.getBackStackEntryCount() != 0) {
-    //         super.onBackPressed();
-    //         return;
-    //     }
+         if (fm.getBackStackEntryCount() > 0) {
+             superBackPress();
+             return;
+         }
+         if (doubleBackToExitPressedOnce || fm.getBackStackEntryCount() != 0) {
+             super.onBackPressed();
+             return;
+         }
 
-    //     this.doubleBackToExitPressedOnce = true;
-    //     Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show();
+         this.doubleBackToExitPressedOnce = true;
+         Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show();
 
-    //     new Handler().postDelayed(new Runnable() {
+         new Handler().postDelayed(new Runnable() {
 
-    //         @Override
-    //         public void run() {
-    //             doubleBackToExitPressedOnce = false;
-    //         }
-    //     }, 2000);
-    // }
+             @Override
+             public void run() {
+                 doubleBackToExitPressedOnce = false;
+             }
+         }, 2000);
+     }
 
-    // public void superBackPress() {
-    //     super.onBackPressed();
-    // }
+     public void superBackPress() {
+         super.onBackPressed();
+     }
 }

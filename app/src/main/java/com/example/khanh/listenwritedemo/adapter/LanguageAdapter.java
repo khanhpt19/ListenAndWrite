@@ -11,11 +11,9 @@ import android.widget.TextView;
 
 import com.example.khanh.listenwritedemo.R;
 import com.example.khanh.listenwritedemo.module.Language;
-import com.example.khanh.listenwritedemo.module.Section;
 
 import java.util.List;
 
-import static com.example.khanh.listenwritedemo.fragment.FramentListenWrite.MyPREFERENCES;
 
 /**
  * Created by Administrator on 7/27/2017.
