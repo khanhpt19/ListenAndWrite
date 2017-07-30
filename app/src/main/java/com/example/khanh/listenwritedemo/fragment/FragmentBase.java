@@ -28,7 +28,6 @@ public abstract class FragmentBase extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //settingPrefs = SettingPrefs.getInstance(getContext());
         if (savedInstanceState != null) {
             bundleSavedWhenInStack = savedInstanceState;
             savedWhenInStackFlag = true;

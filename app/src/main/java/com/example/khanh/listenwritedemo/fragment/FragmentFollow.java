@@ -3,17 +3,10 @@ package com.example.khanh.listenwritedemo.fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.example.khanh.listenwritedemo.R;
-import com.example.khanh.listenwritedemo.adapter.AppUtils;
-import com.example.khanh.listenwritedemo.adapter.ApplicationsAdapter;
-import com.example.khanh.listenwritedemo.module.Admob;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.InjectView;
 import butterknife.OnClick;

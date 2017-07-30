@@ -7,7 +7,7 @@ android {
         applicationId "com.example.khanh.listenwritedemo"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 1
+        versionCode 100
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -38,6 +38,7 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.android.support:cardview-v7:25.3.1'
     compile 'com.skyfishjy.ripplebackground:library:1.0.1'
+    compile 'com.facebook.android:audience-network-sdk:4.23.0'
 
     compile 'com.daimajia.numberprogressbar:library:1.4@aar'
 

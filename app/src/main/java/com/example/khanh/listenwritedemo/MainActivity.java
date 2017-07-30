@@ -1,10 +1,8 @@
 package com.example.khanh.listenwritedemo;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.ApplicationErrorReport;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,36 +10,31 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.WindowManager;
-import android.widget.TextView;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
-//import com.example.khanh.listenwritedemo.adapter.ActivityBase;
-import com.example.khanh.listenwritedemo.adapter.AppUtils;
+import com.example.khanh.listenwritedemo.helper.ActivityBase;
+import com.example.khanh.listenwritedemo.helper.AppUtils;
 import com.example.khanh.listenwritedemo.fragment.FragmentApplications;
 import com.example.khanh.listenwritedemo.fragment.FragmentFollow;
-import com.example.khanh.listenwritedemo.fragment.FragmentLanguage;
 import com.example.khanh.listenwritedemo.fragment.FragmentSection;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
-
+public class MainActivity extends ActivityBase implements NavigationView.OnNavigationItemSelectedListener{
+    @InjectView(R.id.adsContainer)
+    FrameLayout adsContainer;
     private boolean doubleBackToExitPressedOnce = false;
     private Fragment curFragment;
     private String categoryCurrent;
@@ -58,10 +51,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
-//          full screen
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        //StasusBar Color
+        initBannerAds(adsContainer);
+
+
+//        full screen
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        StasusBar Color
 //        if (Build.VERSION.SDK_INT >= 21) {
 //            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 //            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colorBlue));
@@ -156,30 +152,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 //     Optional for press again to exit app
-     @Override
-     public void onBackPressed() {
-         FragmentManager fm = getSupportFragmentManager();
-
-         if (fm.getBackStackEntryCount() > 0) {
-             superBackPress();
-             return;
-         }
-         if (doubleBackToExitPressedOnce || fm.getBackStackEntryCount() != 0) {
-             super.onBackPressed();
-             return;
-         }
-
-         this.doubleBackToExitPressedOnce = true;
-         Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show();
-
-         new Handler().postDelayed(new Runnable() {
-
-             @Override
-             public void run() {
-                 doubleBackToExitPressedOnce = false;
-             }
-         }, 2000);
-     }
+//     @Override
+//     public void onBackPressed() {
+//         FragmentManager fm = getSupportFragmentManager();
+//
+//         if (fm.getBackStackEntryCount() > 0) {
+//             superBackPress();
+//             return;
+//         }
+//         if (doubleBackToExitPressedOnce || fm.getBackStackEntryCount() != 0) {
+//             super.onBackPressed();
+//             return;
+//         }
+//
+//         this.doubleBackToExitPressedOnce = true;
+//         Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show();
+//
+//         new Handler().postDelayed(new Runnable() {
+//
+//             @Override
+//             public void run() {
+//                 doubleBackToExitPressedOnce = false;
+//             }
+//         }, 2000);
+//     }
 
      public void superBackPress() {
          super.onBackPressed();

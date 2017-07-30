@@ -1,7 +1,5 @@
 package com.example.khanh.listenwritedemo.adapter;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,15 +7,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
-import com.daimajia.numberprogressbar.NumberProgressBar;
 import com.example.khanh.listenwritedemo.R;
-import com.example.khanh.listenwritedemo.module.Admob;
-import com.example.khanh.listenwritedemo.module.Section;
+import com.example.khanh.listenwritedemo.helper.ImageLoaderUtils;
+import com.example.khanh.listenwritedemo.module.Config;
 
 import java.util.List;
-
-import static android.content.Context.MODE_PRIVATE;
-import static com.example.khanh.listenwritedemo.fragment.FramentListenWrite.MyPREFERENCES;
 
 /**
  * Created by Administrator on 7/28/2017.
@@ -25,9 +19,9 @@ import static com.example.khanh.listenwritedemo.fragment.FramentListenWrite.MyPR
 
 public class ApplicationsAdapter extends RecyclerView.Adapter<ApplicationsAdapter.MyViewHolder> {
 
-    private List<Admob> admobList;
+    private Config admobList;
     CallBack callBack;
-    public ApplicationsAdapter(List<Admob> sectionList, CallBack callBack) {
+    public ApplicationsAdapter(Config sectionList, CallBack callBack) {
         this.admobList = sectionList;
         this.callBack = callBack;
     }
@@ -53,10 +47,10 @@ public class ApplicationsAdapter extends RecyclerView.Adapter<ApplicationsAdapte
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        Admob admob = admobList.get(position);
-        holder.imgApplications.setImageUrl(admob.getIcon_link(), ImageLoaderUtils.getImageLoaderUtils(holder.imgApplications.getContext()));
-        holder.txtNameApplications.setText(admob.getName());
-        holder.txtDesApplications.setText(admob.getDes());
+
+        holder.imgApplications.setImageUrl(admobList.getRcmApp().get(position).getIconLink(), ImageLoaderUtils.getImageLoaderUtils(holder.imgApplications.getContext()));
+        holder.txtNameApplications.setText(admobList.getRcmApp().get(position).getName());
+        holder.txtDesApplications.setText(admobList.getRcmApp().get(position).getDes());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,7 +67,7 @@ public class ApplicationsAdapter extends RecyclerView.Adapter<ApplicationsAdapte
 
     @Override
     public int getItemCount() {
-        return admobList.size();
+        return admobList.getRcmApp().size();
     }
 
     public interface CallBack {

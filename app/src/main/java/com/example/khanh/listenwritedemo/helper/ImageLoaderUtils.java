@@ -1,4 +1,4 @@
-package com.example.khanh.listenwritedemo.adapter;
+package com.example.khanh.listenwritedemo.helper;
 
 import android.app.ActivityManager;
 import android.content.Context;

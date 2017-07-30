@@ -9,12 +9,11 @@ import android.view.View;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.example.khanh.listenwritedemo.R;
-import com.example.khanh.listenwritedemo.adapter.AppUtils;
+import com.example.khanh.listenwritedemo.helper.AppUtils;
 import com.example.khanh.listenwritedemo.adapter.ApplicationsAdapter;
-import com.example.khanh.listenwritedemo.adapter.SectionAdapter;
-import com.example.khanh.listenwritedemo.module.Admob;
+import com.example.khanh.listenwritedemo.module.Config;
 import com.example.khanh.listenwritedemo.module.Section;
-import com.example.khanh.listenwritedemo.request.TaskAdmob;
+import com.example.khanh.listenwritedemo.request.TaskConfig;
 import com.example.khanh.listenwritedemo.request.TaskSection;
 
 import java.util.ArrayList;
@@ -32,7 +31,7 @@ public class FragmentApplications extends FragmentBase implements ApplicationsAd
     @InjectView(R.id.toolbar)
     Toolbar toolbar;
     private ApplicationsAdapter mAdapter;
-    List<Admob> admobList = new ArrayList();
+    Config config;
     @Override
     protected void initDataDefault() {
         super.initDataDefault();
@@ -50,19 +49,18 @@ public class FragmentApplications extends FragmentBase implements ApplicationsAd
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         rv_applications.setLayoutManager(layoutManager);
 
-        mAdapter = new ApplicationsAdapter(admobList, this);
+        mAdapter = new ApplicationsAdapter(config, this);
 
         rv_applications.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
     }
 
     private void loadData() {
-        TaskAdmob taskQuestion = new TaskAdmob(getContext());
-        taskQuestion.request(new Response.Listener<ArrayList<Admob>>() {
+        TaskConfig taskQuestion = new TaskConfig(getContext());
+        taskQuestion.request(new Response.Listener<Config>() {
             @Override
-            public void onResponse(ArrayList<Admob> response) {
-                admobList=response;
-//                toast(response.size()+"");
+            public void onResponse(Config response) {
+                config=response;
                 loadList();
             }
         }, new Response.ErrorListener() {
@@ -94,6 +92,6 @@ public class FragmentApplications extends FragmentBase implements ApplicationsAd
 
     @Override
     public void OnClick(int indexx) {
-        AppUtils.openApp(mainActivity,admobList.get(indexx).getPid());
+        AppUtils.openApp(mainActivity,config.getRcmApp().get(indexx).getPid());
     }
 }

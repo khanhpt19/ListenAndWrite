@@ -7,7 +7,6 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
@@ -15,11 +14,12 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.khanh.listenwritedemo.R;
-import com.example.khanh.listenwritedemo.adapter.AnimHelper;
+import com.example.khanh.listenwritedemo.helper.AnimHelper;
 import com.example.khanh.listenwritedemo.adapter.MyFragmentPagerAdapter;
 import com.example.khanh.listenwritedemo.module.Section;
 import com.skyfishjy.library.RippleBackground;
@@ -53,6 +53,7 @@ public class FramentListenWrite extends FragmentBase {
     TextView tvhint;
     @InjectView(R.id.txtShowResult)
     TextView txtShowResult;
+
     private MyFragmentPagerAdapter myFragmentPagerAdapter;
     private ArrayList<Fragment> listFragment = new ArrayList<>();
 
@@ -89,6 +90,7 @@ public class FramentListenWrite extends FragmentBase {
 
         progressbar.setMax(section.getPhrases().size());
         txtNumCorrects.setText("0/" + section.getPhrases().size());
+
     }
 
 
@@ -134,6 +136,7 @@ public class FramentListenWrite extends FragmentBase {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
     }
+
     public void share(){
         sharedpreferences = getContext().getSharedPreferences(String.valueOf(MyPREFERENCES),MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -141,6 +144,7 @@ public class FramentListenWrite extends FragmentBase {
         editor.putInt("corrects_" + index, ncorrects);
         editor.commit();
     }
+
     @OnClick({R.id.btnNext, R.id.btnHelp, R.id.imgHinh, R.id.txtAnswer})
     public void onClick(View v) {
         k = viewpager.getCurrentItem();
@@ -148,7 +152,7 @@ public class FramentListenWrite extends FragmentBase {
         if (v.getId() == R.id.imgHinh) {
             try {
                 Uri uri = Uri.parse(section.getPhrases().get(k).getAudio_url().toString());
-                MediaPlayer player = new MediaPlayer();
+                final MediaPlayer player = new MediaPlayer();
                 player.setAudioStreamType(AudioManager.STREAM_MUSIC);
                 player.setDataSource(mainActivity, uri);
                 player.prepare();
@@ -158,6 +162,7 @@ public class FramentListenWrite extends FragmentBase {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
                         ripple.stopRippleAnimation();
+                        player.release();
                     }
                 });
             } catch (Exception e) {

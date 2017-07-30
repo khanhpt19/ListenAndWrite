@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
     <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/toolbar"
@@ -100,7 +99,6 @@
                 android:id="@+id/ripple"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 app:rb_color="@color/colorBlue"
                 app:rb_duration="1000"

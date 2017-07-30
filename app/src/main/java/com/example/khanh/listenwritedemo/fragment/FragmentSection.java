@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -32,6 +33,8 @@ import static com.example.khanh.listenwritedemo.fragment.FragmentLanguage.PREFER
  */
 
 public class FragmentSection extends FragmentBase implements SectionAdapter.CallBack {
+//    @InjectView(R.id.adsContainer)
+//    FrameLayout adsContainer;
     @InjectView(R.id.toolbar)
     Toolbar toolbar;
     @InjectView(R.id.recycler_view)
@@ -76,6 +79,8 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+//        mainActivity.initBannerAds(adsContainer);
+
     }
 
     private void loadList() {
@@ -116,6 +121,7 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
     @Override
     public void OnClick(int index) {
         mainActivity.onOpenFragment(FramentListenWrite.newInstance(sectionList.get(index)), true);
+//        mainActivity.checkToShowInterstitialAds();
     }
 
     public static FragmentSection newInstance(String code) {

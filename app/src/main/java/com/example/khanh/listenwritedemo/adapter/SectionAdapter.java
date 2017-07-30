@@ -3,19 +3,15 @@ package com.example.khanh.listenwritedemo.adapter;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.toolbox.NetworkImageView;
 import com.daimajia.numberprogressbar.NumberProgressBar;
-import com.example.khanh.listenwritedemo.MainActivity;
 import com.example.khanh.listenwritedemo.R;
+import com.example.khanh.listenwritedemo.helper.CircleNetworkImageView;
+import com.example.khanh.listenwritedemo.helper.ImageLoaderUtils;
 import com.example.khanh.listenwritedemo.module.Section;
 
 import java.util.List;
@@ -94,7 +90,6 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.MyViewHo
 
     public interface CallBack {
         void OnClick(int indexx);
-
     }
 
 }
