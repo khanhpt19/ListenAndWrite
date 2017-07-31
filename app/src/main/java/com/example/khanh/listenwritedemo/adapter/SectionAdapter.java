@@ -12,6 +12,7 @@ import com.daimajia.numberprogressbar.NumberProgressBar;
 import com.example.khanh.listenwritedemo.R;
 import com.example.khanh.listenwritedemo.helper.CircleNetworkImageView;
 import com.example.khanh.listenwritedemo.helper.ImageLoaderUtils;
+import com.example.khanh.listenwritedemo.helper.SharePreferenceUtils;
 import com.example.khanh.listenwritedemo.module.Section;
 
 import java.util.List;
@@ -58,14 +59,11 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.MyViewHo
         Section section = sectionList.get(position);
 
         SharedPreferences prefs = context.getSharedPreferences(String.valueOf(MyPREFERENCES), MODE_PRIVATE);
-//        int index = prefs.getInt("index", 0);
-//        Toast.makeText(context,index+"",Toast.LENGTH_SHORT).show();
         int corrects = prefs.getInt("corrects_" + section.getId(), 0);
 
         holder.imgSection.setImageUrl(section.getImage_url(), ImageLoaderUtils.getImageLoaderUtils(holder.imgSection.getContext()));
         holder.proressbarSection.setMax(section.getPhrases().size());
-        holder.txtNameSection.setText(section.getTitle_translate());
-
+        holder.txtNameSection.setText(section.getTitle_translate()+" ("+section.getPhrases().size()+")");
 
         holder.proressbarSection.setProgress(corrects);
 
@@ -77,11 +75,6 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.MyViewHo
         });
 
     }
-
-
-//    public SharedPreferences getSharedPreferences(String name, int mode) {
-//        return mBase.getSharedPreferences(name, mode);
-//    }
 
     @Override
     public int getItemCount() {

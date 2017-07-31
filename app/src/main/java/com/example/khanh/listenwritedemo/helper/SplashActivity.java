@@ -34,7 +34,6 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-//        settingPrefs = SettingPrefs.newInstance(this);
         getSetting();
     }
 
@@ -45,7 +44,7 @@ public class SplashActivity extends AppCompatActivity {
             public void onResponse(Config response) {
                 config=response;
                 Log.d("config", new Gson().toJson(response));
-                SharePreferenceUtils.setString(getApplicationContext(),"SPLASH",new Gson().toJson(config));
+                SharePreferenceUtils.setString(getBaseContext(),"SPLASH",new Gson().toJson(config));
                 executeResponse();
             }
         }, new Response.ErrorListener() {
@@ -55,7 +54,6 @@ public class SplashActivity extends AppCompatActivity {
             }
         });
     }
-
 
     private void executeResponse()  {
         if(config.getUpdateSetting().getSwitchAppEnable()){
@@ -93,8 +91,7 @@ public class SplashActivity extends AppCompatActivity {
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
 
         // 2. Chain together various setter methods to set the dialog characteristics
-        builder.setMessage(msg)
-                .setTitle(title);
+        builder.setMessage(msg).setTitle(title);
         // Add the buttons
         builder.setPositiveButton("Update Now", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -161,7 +158,6 @@ public class SplashActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         AppUtils.openStore(getApplicationContext(),appPackageName);
-//        AndroidUtils.openStoreWithPackageId(this, appPackageName, "update_" + String.valueOf(versionCode));
         finish();
     }
 

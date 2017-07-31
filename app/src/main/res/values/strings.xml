@@ -6,4 +6,6 @@
     <string name="admob_interstitial_def">ca-app-pub-7391223309570947/9417776917</string>
     <string name="fbads_banner_def">858615907623390_859210704230577</string>
     <string name="admob_banner_def">ca-app-pub-7391223309570947/7941043712</string>
+    <string-array name="device_admob">2151E5C36D7116ABE94EADED52FC15C3</string-array>
+    <string-array name="device_fb">2151E5C36D7116ABE94EADED52FC15C3</string-array>
 </resources>

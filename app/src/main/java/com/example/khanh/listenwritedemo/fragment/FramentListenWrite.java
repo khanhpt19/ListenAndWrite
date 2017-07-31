@@ -8,6 +8,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -15,12 +16,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.khanh.listenwritedemo.R;
 import com.example.khanh.listenwritedemo.helper.AnimHelper;
 import com.example.khanh.listenwritedemo.adapter.MyFragmentPagerAdapter;
+import com.example.khanh.listenwritedemo.helper.SharePreferenceUtils;
 import com.example.khanh.listenwritedemo.module.Section;
 import com.skyfishjy.library.RippleBackground;
 
@@ -37,14 +40,20 @@ import static android.content.Context.MODE_PRIVATE;
  */
 
 public class FramentListenWrite extends FragmentBase {
+    //    @InjectView(R.id.adsContainer)
+//    FrameLayout adsContainer;
     @InjectView(R.id.viewpager)
     NonSwipeableViewPager viewpager;
+    @InjectView(R.id.imgCheck)
+    ImageView imgCheck;
     @InjectView(R.id.toolbar)
     Toolbar toolbar;
     @InjectView(R.id.progressbar)
     ProgressBar progressbar;
     @InjectView(R.id.btnHelp)
     Button btnHelp;
+    @InjectView(R.id.btnNext)
+    Button btnNext;
     @InjectView(R.id.txtNumCorrects)
     TextView txtNumCorrects;
     @InjectView(R.id.ripple)
@@ -59,16 +68,16 @@ public class FramentListenWrite extends FragmentBase {
 
     SharedPreferences sharedpreferences;
     public static final int MyPREFERENCES = 0;
-    ArrayList<Integer>mcorrects=new ArrayList<>();
     int index;
     Section section;
     @InjectView(R.id.txtAnswer)
     EditText txtAnswer;
     Handler mHandler = new Handler();
-    int ncorrects = 0, nmistakes = 0,k;
+    int ncorrects = 0, nmistakes = 0, k;
 
-    List<String> acorrects= new ArrayList<>();
-    List<String>amistakes= new ArrayList<>();
+    List<String> acorrects = new ArrayList<>();
+    List<String> amistakes = new ArrayList<>();
+
     @Override
     protected void initDataDefault() {
         super.initDataDefault();
@@ -82,15 +91,14 @@ public class FramentListenWrite extends FragmentBase {
             @Override
             public void onClick(View v) {
                 mainActivity.onBackPressed();
-                mainActivity.onOpenFragment(FragmentResult.newInstance(acorrects, amistakes), true);
-
+//                mainActivity.onOpenFragment(FragmentResult.newInstance(acorrects, amistakes), true);
             }
         });
         loadList();
 
         progressbar.setMax(section.getPhrases().size());
         txtNumCorrects.setText("0/" + section.getPhrases().size());
-
+//        adsContainer.setVisibility(View.INVISIBLE);
     }
 
 
@@ -137,14 +145,6 @@ public class FramentListenWrite extends FragmentBase {
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
     }
 
-    public void share(){
-        sharedpreferences = getContext().getSharedPreferences(String.valueOf(MyPREFERENCES),MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putInt("index", index);
-        editor.putInt("corrects_" + index, ncorrects);
-        editor.commit();
-    }
-
     @OnClick({R.id.btnNext, R.id.btnHelp, R.id.imgHinh, R.id.txtAnswer})
     public void onClick(View v) {
         k = viewpager.getCurrentItem();
@@ -182,8 +182,8 @@ public class FramentListenWrite extends FragmentBase {
                 @Override
                 public void run() {
                     if (isAlive()) {
-                    btnHelp.setVisibility(View.VISIBLE);
-                    AnimHelper.hideReveal(btnHelp, tvhint, tvhint.getWidth());
+                        btnHelp.setVisibility(View.VISIBLE);
+                        AnimHelper.hideReveal(btnHelp, tvhint, tvhint.getWidth());
                     }
                 }
             }, 3000);
@@ -193,29 +193,134 @@ public class FramentListenWrite extends FragmentBase {
         String b = section.getPhrases().get(k).getText().toString();
 
         if (v.getId() == R.id.btnNext) {
-            if (b.contains(".") || b.contains(",") || b.contains("?") || b.contains(";")|| b.contains("!")) {
-                if (a.toUpperCase().equalsIgnoreCase(b.substring(0, b.length() - 1).toUpperCase())) {
-                    ncorrects++;
-                    acorrects.add(b);
-                    txtShowResult.setText(txtAnswer.getText().toString());
-                    txtShowResult.setTextColor(getResources().getColor(R.color.colorGreen));
-                } else {
-                    nmistakes++;
-                    amistakes.add(b);
-                    txtShowResult.setText(section.getPhrases().get(k).getText().toString());
-                    txtShowResult.setTextColor(getResources().getColor(R.color.colorRed));
+
+            if ((b.contains(".") || b.contains(",") || b.contains("?") || b.contains(";") || b.contains("!"))) {
+                if( a.substring((a.length()-1),a.length()).contains(" ")){
+                    if ((a.substring(0,a.length()-1).toUpperCase()).equalsIgnoreCase(b.substring(0, b.length() - 1).toUpperCase())) {
+                        ncorrects++;
+                        acorrects.add(b);
+                        imgCheck.setVisibility(View.VISIBLE);
+                        imgCheck.setImageResource(R.drawable.ic_done);
+                        txtShowResult.setText(section.getPhrases().get(k).getText().toString());
+                        txtShowResult.setTextColor(getResources().getColor(R.color.colorGreen));
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                imgCheck.setVisibility(View.INVISIBLE);
+                                txtShowResult.setText("");
+                            }
+                        }, 3000);
+                    } else {
+                        nmistakes++;
+                        amistakes.add(b);
+                        imgCheck.setVisibility(View.VISIBLE);
+                        imgCheck.setImageResource(R.drawable.ic_clear);
+                        txtShowResult.setText(section.getPhrases().get(k).getText().toString());
+                        txtShowResult.setTextColor(getResources().getColor(R.color.colorRed));
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                imgCheck.setVisibility(View.INVISIBLE);
+                                txtShowResult.setText("");
+                            }
+                        }, 3000);
+                    }
                 }
-            } else {
-                if (a.toUpperCase().equalsIgnoreCase(b.toUpperCase())) {
-                    ncorrects++;
-                    acorrects.add(b);
-                    txtShowResult.setText(txtAnswer.getText().toString());
-                    txtShowResult.setTextColor(getResources().getColor(R.color.colorGreen));
-                } else {
-                    nmistakes++;
-                    amistakes.add(b);
-                    txtShowResult.setText(section.getPhrases().get(k).getText().toString());
-                    txtShowResult.setTextColor(getResources().getColor(R.color.colorRed));
+              else{
+                    if ((a.toUpperCase()).equalsIgnoreCase(b.substring(0, b.length() - 1).toUpperCase())) {
+                        ncorrects++;
+                        acorrects.add(b);
+                        imgCheck.setVisibility(View.VISIBLE);
+                        imgCheck.setImageResource(R.drawable.ic_done);
+                        txtShowResult.setText(section.getPhrases().get(k).getText().toString());
+                        txtShowResult.setTextColor(getResources().getColor(R.color.colorGreen));
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                imgCheck.setVisibility(View.INVISIBLE);
+                                txtShowResult.setText("");
+                            }
+                        }, 3000);
+                    } else {
+                        nmistakes++;
+                        amistakes.add(b);
+                        imgCheck.setVisibility(View.VISIBLE);
+                        imgCheck.setImageResource(R.drawable.ic_clear);
+                        txtShowResult.setText(section.getPhrases().get(k).getText().toString());
+                        txtShowResult.setTextColor(getResources().getColor(R.color.colorRed));
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                imgCheck.setVisibility(View.INVISIBLE);
+                                txtShowResult.setText("");
+                            }
+                        }, 3000);
+                    }
+                }
+            }
+
+            else {
+                if( a.substring((a.length()-1),a.length()).contains(" ")){
+                    if ((a.substring(0,a.length()-1).toUpperCase()).equalsIgnoreCase(b.toUpperCase())) {
+                        ncorrects++;
+                        acorrects.add(b);
+                        imgCheck.setVisibility(View.VISIBLE);
+                        imgCheck.setImageResource(R.drawable.ic_done);
+                        txtShowResult.setText(section.getPhrases().get(k).getText().toString());
+                        txtShowResult.setTextColor(getResources().getColor(R.color.colorGreen));
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                imgCheck.setVisibility(View.INVISIBLE);
+                                txtShowResult.setText("");
+                            }
+                        }, 3000);
+                    } else {
+                        nmistakes++;
+                        amistakes.add(b);
+                        imgCheck.setVisibility(View.VISIBLE);
+                        imgCheck.setImageResource(R.drawable.ic_clear);
+                        txtShowResult.setText(section.getPhrases().get(k).getText().toString());
+                        txtShowResult.setTextColor(getResources().getColor(R.color.colorRed));
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                imgCheck.setVisibility(View.INVISIBLE);
+                                txtShowResult.setText("");
+                            }
+                        }, 3000);
+                    }
+                }
+                else{
+                    if ((a.toUpperCase()).equalsIgnoreCase(b.toUpperCase())) {
+                        ncorrects++;
+                        acorrects.add(b);
+                        imgCheck.setVisibility(View.VISIBLE);
+                        imgCheck.setImageResource(R.drawable.ic_done);
+                        txtShowResult.setText(section.getPhrases().get(k).getText().toString());
+                        txtShowResult.setTextColor(getResources().getColor(R.color.colorGreen));
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                imgCheck.setVisibility(View.INVISIBLE);
+                                txtShowResult.setText("");
+                            }
+                        }, 3000);
+                    } else {
+                        nmistakes++;
+                        amistakes.add(b);
+                        imgCheck.setVisibility(View.VISIBLE);
+                        imgCheck.setImageResource(R.drawable.ic_clear);
+                        txtShowResult.setText(section.getPhrases().get(k).getText().toString());
+                        txtShowResult.setTextColor(getResources().getColor(R.color.colorRed));
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                imgCheck.setVisibility(View.INVISIBLE);
+                                txtShowResult.setText("");
+                            }
+                        }, 3000);
+                    }
                 }
             }
             new Thread(new Runnable() {
@@ -238,14 +343,14 @@ public class FramentListenWrite extends FragmentBase {
 
             if (k == section.getPhrases().size() - 1) {
                 mainActivity.onOpenFragment(FragmentResult.newInstance(acorrects, amistakes), true);
-                share();
+                sharepref();
             }
 
             viewpager.setCurrentItem(k + 1);
             txtAnswer.setText("");
             try {
                 Uri uri = Uri.parse(section.getPhrases().get(k + 1).getAudio_url().toString());
-                MediaPlayer player = new MediaPlayer();
+                final MediaPlayer player = new MediaPlayer();
                 player.setAudioStreamType(AudioManager.STREAM_MUSIC);
                 player.setDataSource(mainActivity, uri);
                 player.prepare();
@@ -255,18 +360,24 @@ public class FramentListenWrite extends FragmentBase {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
                         ripple.stopRippleAnimation();
+                        player.release();
                     }
                 });
             } catch (Exception e) {
                 System.out.println(e.toString());
             }
-
         }
     }
 
+    public void sharepref() {
+        sharedpreferences = getContext().getSharedPreferences(String.valueOf(MyPREFERENCES), MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putInt("index", index);
+        editor.putInt("corrects_" + index, ncorrects);
+        editor.commit();
+    }
 
     private boolean isAlive() {
         return getActivity() != null;
     }
-
 }

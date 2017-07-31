@@ -2,6 +2,7 @@ package com.example.khanh.listenwritedemo.helper;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -39,7 +40,7 @@ public class ActivityBase extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        config=new Gson().fromJson(SharePreferenceUtils.getString(getApplicationContext(),"SPLASH"),Config.class);
+        config = new Gson().fromJson(SharePreferenceUtils.getString(getBaseContext(), "SPLASH"), Config.class);
     }
 
     public void initBannerAds(FrameLayout containerLayout) {
@@ -51,10 +52,15 @@ public class ActivityBase extends AppCompatActivity {
     }
 
     public void checkToShowInterstitialAds() {
-        toast(Long.parseLong(SharePreferenceUtils.getString(getApplicationContext(),"TIMEVIEW"))+"");
-        Log.d("timeview",Long.parseLong(SharePreferenceUtils.getString(getApplicationContext(),"TIMEVIEW"))+"");
-        long x= Long.parseLong(SharePreferenceUtils.getString(getApplicationContext(),"TIMEVIEW"));
-        if (System.currentTimeMillis() -  x < config.getAdsSetting().getDsecond() * 1000) {
+        long timeViewBefore = 0;
+        try {
+            timeViewBefore = Long.parseLong(SharePreferenceUtils.getString(getBaseContext(), "TIMEVIEW"));
+        } catch (Exception e) {
+            timeViewBefore = 0;
+        }
+        // check time beetwen 2 show ads
+        log("timetoload",System.currentTimeMillis() - timeViewBefore+"");
+        if (System.currentTimeMillis() - timeViewBefore < config.getAdsSetting().getDsecond() * 1000) {
             return;
         }
         if (config.getAdsSetting().getAdsCat().equalsIgnoreCase(FACEBOOK_TAG)) {
@@ -66,11 +72,11 @@ public class ActivityBase extends AppCompatActivity {
 
     private void initAdsBannerAdmob(final FrameLayout containerLayout) {
         AdRequest.Builder builder = new AdRequest.Builder();
-//        for (String device : getResources().getStringArray(R.array.device_admob)) {
-//            builder.addTestDevice(device);
-//        }
-        AdRequest adRequest = builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
+
+        for (String device : getResources().getStringArray(R.array.device_admob)) {
+            builder.addTestDevice(device);
+        }
+        AdRequest adRequest = builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
 
         if (adView == null) {
             // create and add AdsView
@@ -79,9 +85,6 @@ public class ActivityBase extends AppCompatActivity {
                     FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
             containerLayout.addView(adView, params);
         }
-//        if (settingPrefs == null) {
-//            settingPrefs = SettingPrefs.newInstance(this);
-//        }
         String adsId = config.getAdsSetting().getAdmobBanner();
         if (StringUtils.isEmpty(adsId)) {
             adsId = getString(R.string.admob_banner_def);
@@ -118,16 +121,13 @@ public class ActivityBase extends AppCompatActivity {
     }
 
     private void initAdsBannerFB(final FrameLayout containerLayout) {
-//        if (settingPrefs == null) {
-//            settingPrefs = SettingPrefs.newInstance(this);
-//        }
         String adsId = config.getAdsSetting().getFbBanner();
         if (StringUtils.isEmpty(adsId)) {
             adsId = getString(R.string.fbads_banner_def);
         }
-//        for (String device : getResources().getStringArray(R.array.device_fb)) {
-//            com.facebook.ads.AdSettings.addTestDevice(device);
-//        }
+        for (String device : getResources().getStringArray(R.array.device_fb)) {
+            com.facebook.ads.AdSettings.addTestDevice(device);
+        }
         // Instantiate an AdView view
         adViewFB = new com.facebook.ads.AdView(this, adsId, com.facebook.ads.AdSize.BANNER_HEIGHT_50);
         // Add the ad view to your activity layout
@@ -174,11 +174,11 @@ public class ActivityBase extends AppCompatActivity {
             final InterstitialAd interstitialAd = new InterstitialAd(this);
             interstitialAd.setAdUnitId(adsId);
             AdRequest.Builder builder = new AdRequest.Builder();
-//            for (String device : getResources().getStringArray(R.array.device_admob)) {
-//                builder.addTestDevice(device);
-//            }
-            AdRequest adRequest = builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                    .build();
+
+            for (String device : getResources().getStringArray(R.array.device_admob)) {
+                builder.addTestDevice(device);
+            }
+            AdRequest adRequest = builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
             Log.i("InterstitialAds", "Starting load ads...");
             interstitialAd.setAdListener(new AdListener() {
                 @Override
@@ -191,7 +191,7 @@ public class ActivityBase extends AppCompatActivity {
                 public void onAdLoaded() {
                     super.onAdLoaded();
                     Log.i("InterstitialAds", "Ad loaded");
-                    SharePreferenceUtils.setString(getApplicationContext(),"TIMEVIEW",System.currentTimeMillis()+"");
+                    SharePreferenceUtils.setString(getBaseContext(), "TIMEVIEW", String.valueOf(System.currentTimeMillis()));
                     interstitialAd.show();
                 }
             });
@@ -222,7 +222,7 @@ public class ActivityBase extends AppCompatActivity {
             public void onAdLoaded(Ad ad) {
                 super.onAdLoaded(ad);
                 Log.i("InterstitialAds Facebok", "Ad loaded");
-                SharePreferenceUtils.setString(getApplicationContext(),"TIMEVIEW",System.currentTimeMillis()+"");
+                SharePreferenceUtils.setString(getBaseContext(), "TIMEVIEW", String.valueOf(System.currentTimeMillis()));
                 interstitialAdFB.show();
             }
 

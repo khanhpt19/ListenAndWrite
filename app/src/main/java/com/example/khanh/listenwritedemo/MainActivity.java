@@ -3,6 +3,7 @@ package com.example.khanh.listenwritedemo;
 import android.annotation.TargetApi;
 import android.app.ApplicationErrorReport;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,7 +17,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.khanh.listenwritedemo.helper.ActivityBase;
@@ -52,6 +56,10 @@ public class MainActivity extends ActivityBase implements NavigationView.OnNavig
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
+        View header =navigationView.getHeaderView(0);
+        TextView txtchamngon= (TextView) header.findViewById(R.id.txtchamngon);
+        Typeface face=Typeface.createFromAsset(getAssets(), "font/DancingScript.ttf");
+        txtchamngon.setTypeface(face);
         initBannerAds(adsContainer);
 
 

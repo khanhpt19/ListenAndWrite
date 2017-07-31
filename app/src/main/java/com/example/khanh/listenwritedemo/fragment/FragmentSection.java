@@ -33,8 +33,7 @@ import static com.example.khanh.listenwritedemo.fragment.FragmentLanguage.PREFER
  */
 
 public class FragmentSection extends FragmentBase implements SectionAdapter.CallBack {
-//    @InjectView(R.id.adsContainer)
-//    FrameLayout adsContainer;
+
     @InjectView(R.id.toolbar)
     Toolbar toolbar;
     @InjectView(R.id.recycler_view)
@@ -55,6 +54,7 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
         mainActivity.setUpToolbar(toolbar);
 
         toolbar.inflateMenu(R.menu.menu);
+
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -80,7 +80,6 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
             }
         });
 //        mainActivity.initBannerAds(adsContainer);
-
     }
 
     private void loadList() {
@@ -121,7 +120,7 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
     @Override
     public void OnClick(int index) {
         mainActivity.onOpenFragment(FramentListenWrite.newInstance(sectionList.get(index)), true);
-//        mainActivity.checkToShowInterstitialAds();
+        mainActivity.checkToShowInterstitialAds();
     }
 
     public static FragmentSection newInstance(String code) {

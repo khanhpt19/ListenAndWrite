@@ -12,25 +12,37 @@
         android:layout_margin="4dp"
         android:background="@android:color/white"
         android:gravity="center"
-        app:cardCornerRadius="@dimen/cardview_radius_large"
+        app:cardCornerRadius="5dp"
         app:cardElevation="6dp"
+        android:layout_gravity="center"
         app:cardMaxElevation="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <com.example.khanh.listenwritedemo.helper.CircleNetworkImageView
+                    android:id="@+id/imgSection"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/letlearn" />
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:padding="1dp"
+                    android:src="@drawable/circle_shape"/>
+            </RelativeLayout>
 
-            <com.example.khanh.listenwritedemo.helper.CircleNetworkImageView
-                android:id="@+id/imgSection"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/letlearn" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
                 android:orientation="vertical">
 
                 <TextView
@@ -45,20 +57,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="20dp"
 
                     app:progress_current="0"
                     app:progress_max="100"
 
-                    app:progress_reached_bar_height="5dp"
+                    app:progress_reached_bar_height="3dp"
                     app:progress_reached_color="#00a2ff"
                     app:progress_text_color="#00a2ff"
                     app:progress_text_offset="3dp"
                     app:progress_text_size="15sp"
                     app:progress_text_visibility="visible"
 
-                    app:progress_unreached_bar_height="5dp"
+                    app:progress_unreached_bar_height="3dp"
                     app:progress_unreached_color="#CCCCCC" />
             </LinearLayout>
         </LinearLayout>
