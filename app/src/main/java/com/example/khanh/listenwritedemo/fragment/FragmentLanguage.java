@@ -36,7 +36,6 @@ public class FragmentLanguage extends FragmentBase implements LanguageAdapter.Ca
     @InjectView(R.id.toolbar)
     Toolbar toolbar;
     List<Language> languagelist = new ArrayList();
-    Language language;
     SharedPreferences spreferences;
     public static final int PREFERENCES = 0;
 
@@ -52,10 +51,6 @@ public class FragmentLanguage extends FragmentBase implements LanguageAdapter.Ca
             }
         });
         loadData();
-
-//        Bundle bundle= getArguments();
-//        int name=  bundle.getInt("INDEX");
-//        toast(name+"");
     }
 
     private void loadList() {

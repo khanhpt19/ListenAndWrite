@@ -1,10 +1,13 @@
 package com.example.khanh.listenwritedemo.helper;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
@@ -208,5 +211,6 @@ public class SplashActivity extends AppCompatActivity {
             }
         }, 2000);
     }
+
 
 }

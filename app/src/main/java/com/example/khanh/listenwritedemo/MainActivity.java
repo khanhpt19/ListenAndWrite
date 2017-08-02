@@ -1,9 +1,13 @@
 package com.example.khanh.listenwritedemo;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.ApplicationErrorReport;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,11 +27,13 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.khanh.listenwritedemo.fragment.FramentListenWrite;
 import com.example.khanh.listenwritedemo.helper.ActivityBase;
 import com.example.khanh.listenwritedemo.helper.AppUtils;
 import com.example.khanh.listenwritedemo.fragment.FragmentApplications;
 import com.example.khanh.listenwritedemo.fragment.FragmentFollow;
 import com.example.khanh.listenwritedemo.fragment.FragmentSection;
+import com.example.khanh.listenwritedemo.helper.ViewDialog;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -36,9 +42,9 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
-public class MainActivity extends ActivityBase implements NavigationView.OnNavigationItemSelectedListener{
-    @InjectView(R.id.adsContainer)
-    FrameLayout adsContainer;
+public class MainActivity extends ActivityBase implements NavigationView.OnNavigationItemSelectedListener {
+//    @InjectView(R.id.adsContainer)
+//    FrameLayout adsContainer;
     private boolean doubleBackToExitPressedOnce = false;
     private Fragment curFragment;
     private String categoryCurrent;
@@ -52,15 +58,22 @@ public class MainActivity extends ActivityBase implements NavigationView.OnNavig
         setContentView(R.layout.activity_main2);
         ButterKnife.inject(this); // Init views
         onOpenFragment(new FragmentSection(), false);
+//        if(checkConnect()==true){
+//            onOpenFragment(new FragmentSection(), false);
+//        }
+//        else{
+//            ViewDialog viewDialog = new ViewDialog();
+//            viewDialog.showDialog((Activity) getApplicationContext(), "Your device is not connected Internet. Please connect Internet and restart app",2);
+//        }
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
-        View header =navigationView.getHeaderView(0);
-        TextView txtchamngon= (TextView) header.findViewById(R.id.txtchamngon);
-        Typeface face=Typeface.createFromAsset(getAssets(), "font/DancingScript.ttf");
+        View header = navigationView.getHeaderView(0);
+        TextView txtchamngon = (TextView) header.findViewById(R.id.txtchamngon);
+        Typeface face = Typeface.createFromAsset(getAssets(), "font/DancingScript.ttf");
         txtchamngon.setTypeface(face);
-        initBannerAds(adsContainer);
+//        initBannerAds(adsContainer);
 
 
 //        full screen
@@ -103,18 +116,18 @@ public class MainActivity extends ActivityBase implements NavigationView.OnNavig
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.nav_listening) {
-            AppUtils.openApp(MainActivity.this,"com.yobimi.bbclearningenglish");
-        }else if (id == R.id.nav_chat) {
-            AppUtils.openApp(MainActivity.this,"com.yobimi.chatenglish");
+            AppUtils.openApp(MainActivity.this, "com.yobimi.bbclearningenglish");
+        } else if (id == R.id.nav_chat) {
+            AppUtils.openApp(MainActivity.this, "com.yobimi.chatenglish");
         } else if (id == R.id.nav_letlearn) {
-            AppUtils.openApp(MainActivity.this,"com.yobimi.voaletlearnenglish.englishgrammar.englishspeak");
+            AppUtils.openApp(MainActivity.this, "com.yobimi.voaletlearnenglish.englishgrammar.englishspeak");
         } else if (id == R.id.nav_rate) {
 //            AppUtils.rateApp(MainActivity.this);
-            AppUtils.openApp(MainActivity.this,"com.yobimi.bbclearningenglish");
+            AppUtils.openApp(MainActivity.this, "com.yobimi.bbclearningenglish");
         } else if (id == R.id.nav_application) {
-            onOpenFragment(FragmentApplications.newInstance(index),true);
+            onOpenFragment(FragmentApplications.newInstance(index), true);
         } else if (id == R.id.nav_follow) {
-            onOpenFragment(FragmentFollow.newInstance(index),true);
+            onOpenFragment(FragmentFollow.newInstance(index), true);
 
         }
 
@@ -159,33 +172,42 @@ public class MainActivity extends ActivityBase implements NavigationView.OnNavig
         }
     }
 
-//     Optional for press again to exit app
-//     @Override
-//     public void onBackPressed() {
-//         FragmentManager fm = getSupportFragmentManager();
-//
-//         if (fm.getBackStackEntryCount() > 0) {
-//             superBackPress();
-//             return;
-//         }
-//         if (doubleBackToExitPressedOnce || fm.getBackStackEntryCount() != 0) {
-//             super.onBackPressed();
-//             return;
-//         }
-//
-//         this.doubleBackToExitPressedOnce = true;
-//         Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show();
-//
-//         new Handler().postDelayed(new Runnable() {
-//
-//             @Override
-//             public void run() {
-//                 doubleBackToExitPressedOnce = false;
-//             }
-//         }, 2000);
-//     }
+    //     Optional for press again to exit app
+    @Override
+    public void onBackPressed() {
+        FragmentManager fm = getSupportFragmentManager();
 
-     public void superBackPress() {
-         super.onBackPressed();
-     }
+        if (fm.getBackStackEntryCount() > 0) {
+            superBackPress();
+            return;
+        }
+        if (doubleBackToExitPressedOnce || fm.getBackStackEntryCount() != 0) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
+    }
+
+    public void superBackPress() {
+        super.onBackPressed();
+    }
+
+    public boolean checkConnect() {
+        ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        }
+        return false;
+    }
 }

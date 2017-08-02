@@ -1,7 +1,10 @@
 package com.example.khanh.listenwritedemo.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.example.khanh.listenwritedemo.R;
 import com.example.khanh.listenwritedemo.adapter.SectionAdapter;
+import com.example.khanh.listenwritedemo.helper.ViewDialog;
 import com.example.khanh.listenwritedemo.module.Language;
 import com.example.khanh.listenwritedemo.module.Section;
 import com.example.khanh.listenwritedemo.request.TaskSection;
@@ -33,7 +37,8 @@ import static com.example.khanh.listenwritedemo.fragment.FragmentLanguage.PREFER
  */
 
 public class FragmentSection extends FragmentBase implements SectionAdapter.CallBack {
-
+    @InjectView(R.id.adsContainer)
+    FrameLayout adsContainer;
     @InjectView(R.id.toolbar)
     Toolbar toolbar;
     @InjectView(R.id.recycler_view)
@@ -60,8 +65,15 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
             public boolean onMenuItemClick(MenuItem item) {
                 int id = item.getItemId();
                 if (id == R.id.mnMore) {
-                    mainActivity.onOpenFragment(FragmentLanguage.newInstance(name), true);
-                    dem++;
+                    if(checkConnect()==true){
+                        mainActivity.onOpenFragment(FragmentLanguage.newInstance(name), true);
+                        dem++;
+                    }
+                    else{
+                        ViewDialog viewDialog = new ViewDialog();
+                        viewDialog.showDialog(mainActivity, "Your device is not connected Internet. Please connect Internet and restart app",2);
+                    }
+
                 }
                 return false;
             }
@@ -75,11 +87,17 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadData();
+                if(checkConnect()==true){
+                    loadData();
+                }
+                else{
+                    ViewDialog viewDialog = new ViewDialog();
+                    viewDialog.showDialog(mainActivity, "Your device is not connected Internet. Please connect Internet and restart app",2);
+                }
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-//        mainActivity.initBannerAds(adsContainer);
+        mainActivity.initBannerAds(adsContainer);
     }
 
     private void loadList() {
@@ -103,6 +121,8 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    ViewDialog viewDialog = new ViewDialog();
+                    viewDialog.showDialog(mainActivity, "Your device is not connected Internet. Please connect Internet and restart app",2);
                 }
             });
         }
@@ -119,8 +139,15 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
 
     @Override
     public void OnClick(int index) {
-        mainActivity.onOpenFragment(FramentListenWrite.newInstance(sectionList.get(index)), true);
-        mainActivity.checkToShowInterstitialAds();
+        if(checkConnect()==true){
+            mainActivity.onOpenFragment(FramentListenWrite.newInstance(sectionList.get(index)), true);
+//            mainActivity.checkToShowInterstitialAds();
+        }
+        else{
+            ViewDialog viewDialog = new ViewDialog();
+            viewDialog.showDialog(mainActivity, "Your device is not connected Internet. Please connect Internet and restart app",2);
+        }
+
     }
 
     public static FragmentSection newInstance(String code) {
@@ -139,4 +166,12 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
         return fragmentSection;
     }
 
+    public boolean checkConnect() {
+        ConnectivityManager cm = (ConnectivityManager) mainActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        }
+        return false;
+    }
 }
