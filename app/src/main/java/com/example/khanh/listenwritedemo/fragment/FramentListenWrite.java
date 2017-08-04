@@ -2,28 +2,19 @@ package com.example.khanh.listenwritedemo.fragment;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.PlaybackParams;
-import android.media.SoundPool;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
-import android.os.Message;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -31,12 +22,10 @@ import android.widget.TextView;
 import com.example.khanh.listenwritedemo.R;
 import com.example.khanh.listenwritedemo.helper.AnimHelper;
 import com.example.khanh.listenwritedemo.adapter.MyFragmentPagerAdapter;
-import com.example.khanh.listenwritedemo.helper.SharePreferenceUtils;
-import com.example.khanh.listenwritedemo.helper.ViewDialog;
+import com.example.khanh.listenwritedemo.helper.NonSwipeableViewPager;
 import com.example.khanh.listenwritedemo.module.Section;
 import com.skyfishjy.library.RippleBackground;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,9 +33,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import static android.content.Context.MODE_PRIVATE;
-import static android.content.Context.SYSTEM_HEALTH_SERVICE;
 import static com.example.khanh.listenwritedemo.R.color.colorOrane;
-import static com.example.khanh.listenwritedemo.R.raw.right;
 
 /**
  * Created by khanh on 7/18/2017.
@@ -85,12 +72,12 @@ public class FramentListenWrite extends FragmentBase {
     SharedPreferences sharedpreferences1;
     public static final int MyPREFERENCES = 0;
     public static final int MyPREFERENCESSTUDY = 0;
-    int index,dem=0,dem1=0;
+    int index, dem = 0, dem1 = 0;
     Section section;
     @InjectView(R.id.txtAnswer)
     EditText txtAnswer;
     Handler mHandler = new Handler();
-    int ncorrects = 0, nmistakes = 0, k,f;
+    int ncorrects = 0, nmistakes = 0, k, f;
 
     List<String> liststudy = new ArrayList<>();
     List<String> acorrects = new ArrayList<>();
@@ -117,14 +104,13 @@ public class FramentListenWrite extends FragmentBase {
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                mainActivity.onOpenFragment(FragmentListStudy.newInstance(liststudy),true);
+                mainActivity.onOpenFragment(FragmentListStudy.newInstance(liststudy), true);
                 return false;
             }
         });
         progressbar.setMax(section.getPhrases().size());
         txtNumCorrects.setText("0/" + section.getPhrases().size());
     }
-
 
     private void loadList() {
         if (section == null) {
@@ -169,8 +155,7 @@ public class FramentListenWrite extends FragmentBase {
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
     }
 
-//    @RequiresApi(api = Build.VERSION_CODES.M)
-    @OnClick({R.id.btnNext, R.id.btnHelp, R.id.imgHinh, R.id.txtAnswer,R.id.imgAdd})
+    @OnClick({R.id.btnNext, R.id.btnHelp, R.id.imgHinh, R.id.txtAnswer, R.id.imgAdd, R.id.btnMean})
     public void onClick(View v) {
         k = viewpager.getCurrentItem();
 
@@ -200,36 +185,60 @@ public class FramentListenWrite extends FragmentBase {
         String a = txtAnswer.getText().toString();
         String b = section.getPhrases().get(k).getText().toString();
 
-        if(v.getId()==R.id.imgAdd){
-            dem1++;
-           sharedpreferences1 = getContext().getSharedPreferences(String.valueOf(MyPREFERENCESSTUDY), MODE_PRIVATE);
+        if (v.getId() == R.id.btnMean) {
+            if(section.getPhrases().get(k).getText_translate()!=null)
+                txtShowResult.setText(section.getPhrases().get(k).getText_translate());
+            else
+                txtShowResult.setText(section.getPhrases().get(k).getText());
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    imgCheck.setVisibility(View.INVISIBLE);
+                    txtShowResult.setText("");
+                }
+            }, 9000);
+        }
+        if (v.getId() == R.id.imgAdd) {
+            sharedpreferences1 = getContext().getSharedPreferences(String.valueOf(MyPREFERENCESSTUDY), MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedpreferences1.edit();
-            editor.putInt("IND",k);
-            editor.putString("TEXT",section.getPhrases().get(k).getText().toString());
+            if(section.getPhrases().get(k).getText_translate()!=null){
+                if (dem1 % 2 == 0) {
+                    liststudy.add(section.getPhrases().get(k).getText().toString() + "\n    " + section.getPhrases().get(k).getText_translate().toString());
+                    imgAdd.setImageResource(R.drawable.ic_added);
+                    toast(section.getPhrases().get(k).getText().toString() + "  added successfully.");
+                    editor.putString("TEXT", liststudy.toString());
+                } else {
+                    liststudy.remove(section.getPhrases().get(k).getText().toString() + "\n    " + section.getPhrases().get(k).getText_translate().toString());
+                    imgAdd.setImageResource(R.drawable.ic_add);
+                    toast(section.getPhrases().get(k).getText().toString() + "  removed successfully.");
+                    editor.putString("TEXT", null);
+                }
+            }
+            else{
+                if (dem1 % 2 == 0) {
+                    liststudy.add(section.getPhrases().get(k).getText().toString() );
+                    imgAdd.setImageResource(R.drawable.ic_added);
+                    toast(section.getPhrases().get(k).getText().toString() + "  added successfully.");
+                    editor.putString("TEXT", liststudy.toString());
+                } else {
+                    liststudy.remove(section.getPhrases().get(k).getText().toString() );
+                    imgAdd.setImageResource(R.drawable.ic_add);
+                    toast(section.getPhrases().get(k).getText().toString() + "  removed successfully.");
+                    editor.putString("TEXT", null);
+                }
+            }
+
+
             editor.apply();
             editor.commit();
-
-            if(dem1%2==1){
-                liststudy.add( section.getPhrases().get(k).getText().toString()+"\n    "+section.getPhrases().get(k).getText_translate().toString());
-                imgAdd.setImageResource(R.drawable.ic_added);
-                toast(section.getPhrases().get(k).getText().toString()+"  added successfully.");
-            }
-
-            else{
-                liststudy.remove(section.getPhrases().get(k).getText().toString()+"\n    "+section.getPhrases().get(k).getText_translate().toString());
-                imgAdd.setImageResource(R.drawable.ic_add);
-                toast(section.getPhrases().get(k).getText().toString()+"  removed successfully.");
-
-            }
-
-//            toast(liststudy.size()+"");
-//            SharePreferenceUtils.setString(mainActivity,"TEXT_"+k,section.getPhrases().get(k).getText().toString());
-//            SharePreferenceUtils.setString(mainActivity,"IND",k+"");
-
+            dem1++;
+//            SharePreferenceUtils.setString(mainActivity,"TEXT",section.getPhrases().get(k).getText().toString());
         }
+
         if (v.getId() == R.id.btnNext) {
             dem++;
-            if(dem%2 == 1){
+            imgAdd.setImageResource(R.drawable.ic_add);
+            if (dem % 2 == 1) {
                 btnNext.setText("Next");
                 btnNext.setBackgroundResource(R.color.colorGreen);
                 if ((b.contains(".") || b.contains(",") || b.contains("?") || b.contains(";") || b.contains("!"))) {
@@ -267,15 +276,15 @@ public class FramentListenWrite extends FragmentBase {
                 }
                 runthread();
                 txtAnswer.setText("");
-            }
-            else{
+            } else {
                 viewpager.setCurrentItem(k + 1);
                 txtAnswer.setText("");
-                playmedia(k+1);
+                playmedia(k + 1);
                 btnNext.setText("Done");
                 btnNext.setBackgroundResource(colorOrane);
                 txtShowResult.setText("");
                 imgCheck.setVisibility(View.INVISIBLE);
+                dem1++;
             }
 
             if (k == section.getPhrases().size() - 1) {
@@ -286,7 +295,7 @@ public class FramentListenWrite extends FragmentBase {
     }
 
     public void correct(String b1) {
-        MediaPlayer mp=MediaPlayer.create(mainActivity,R.raw.right);
+        MediaPlayer mp = MediaPlayer.create(mainActivity, R.raw.right);
         mp.start();
         ncorrects++;
         acorrects.add(b1);
@@ -305,7 +314,7 @@ public class FramentListenWrite extends FragmentBase {
     }
 
     public void mistake(String b1) {
-        MediaPlayer mp=MediaPlayer.create(mainActivity,R.raw.wrong);
+        MediaPlayer mp = MediaPlayer.create(mainActivity, R.raw.wrong);
         mp.start();
         nmistakes++;
         amistakes.add(b1);

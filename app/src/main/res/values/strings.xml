@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Listen Write Demo</string>
+    <string name="app_name">Listen And Write </string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="fbads_interestitial_def">858615907623390_859210900897224</string>

@@ -1,12 +1,16 @@
 package com.example.khanh.listenwritedemo.fragment;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -20,16 +24,21 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.example.khanh.listenwritedemo.R;
 import com.example.khanh.listenwritedemo.adapter.SectionAdapter;
+import com.example.khanh.listenwritedemo.helper.SharePreferenceUtils;
 import com.example.khanh.listenwritedemo.helper.ViewDialog;
+import com.example.khanh.listenwritedemo.module.Config;
 import com.example.khanh.listenwritedemo.module.Language;
+import com.example.khanh.listenwritedemo.module.ListLang;
 import com.example.khanh.listenwritedemo.module.Section;
 import com.example.khanh.listenwritedemo.request.TaskSection;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.InjectView;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.example.khanh.listenwritedemo.fragment.FragmentLanguage.PREFERENCES;
 
 /**
@@ -45,12 +54,15 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
     RecyclerView recycler_view;
     private SectionAdapter mAdapter;
     List<Section> sectionList = new ArrayList();
-    String name = "";
-    String codenal;
+    String name ;
+    String code;
     @InjectView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
-    int dem=0;
-
+    SharedPreferences spreferences;
+    SharedPreferences prefs;
+    int MYPRE=0;
+    int dem = 0;
+    Config config;
     @Override
     protected void initDataDefault() {
         super.initDataDefault();
@@ -59,40 +71,70 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
         mainActivity.setUpToolbar(toolbar);
 
         toolbar.inflateMenu(R.menu.menu);
+        config = new Gson().fromJson(SharePreferenceUtils.getString(getContext(), "SPLASH"), Config.class);
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 int id = item.getItemId();
                 if (id == R.id.mnMore) {
-                    if(checkConnect()==true){
-                        mainActivity.onOpenFragment(FragmentLanguage.newInstance(name), true);
-                        dem++;
-                    }
-                    else{
-                        ViewDialog viewDialog = new ViewDialog();
-                        viewDialog.showDialog(mainActivity, "Your device is not connected Internet. Please connect Internet and restart app",2);
-                    }
+                    if (checkConnect() == true) {
 
+                        final ArrayList<ListLang> listLang = config.getListLang();
+                        String[] items = new String[listLang.size()];
+                        for (int i = 0; i < listLang.size(); i++) {
+                            items[i] = listLang.get(i).getName();
+                        }
+
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setTitle("Choose your native language");
+                        builder.setItems(items, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                code=listLang.get(which).getCode();
+                                loadData(code);
+
+                                spreferences = getContext().getSharedPreferences(String.valueOf(MYPRE), MODE_PRIVATE);
+                                SharedPreferences.Editor editor = spreferences.edit();
+                                editor.putString("code", listLang.get(which).getCode());
+                                editor.commit();
+//                                SharePreferenceUtils.setString(mainActivity,"CODE",code);
+                            }
+                        });
+                        builder.show();
+
+//                        mainActivity.onOpenFragment(FragmentLanguage.newInstance(name), true);
+//                        dem++;
+                    } else {
+                        ViewDialog viewDialog = new ViewDialog();
+                        viewDialog.showDialog(mainActivity, "Your device is not connected Internet. Please connect Internet and restart app", 2);
+                    }
                 }
                 return false;
+
             }
         });
 
-            SharedPreferences prefs1 = getContext().getSharedPreferences(String.valueOf(PREFERENCES), Context.MODE_PRIVATE);
-            codenal = prefs1.getString("code", "");
+//        SharedPreferences prefs1 = getContext().getSharedPreferences(String.valueOf(PREFERENCES), Context.MODE_PRIVATE);
+//        codenal = prefs1.getString("code", "");
+//        SharePreferenceUtils.getString(mainActivity,"code");
+//        toast(SharePreferenceUtils.getString(mainActivity,"code"));
+        final SharedPreferences prefs = mainActivity.getSharedPreferences(String.valueOf(MYPRE), MODE_PRIVATE);
 
-        loadData();
+        name= prefs.getString("code",null);
+        loadData(name);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if(checkConnect()==true){
-                    loadData();
-                }
-                else{
+                if (checkConnect() == true) {
+                    name= prefs.getString("code",null);
+                    loadData(name);
+                    loadData(name);
+                } else {
                     ViewDialog viewDialog = new ViewDialog();
-                    viewDialog.showDialog(mainActivity, "Your device is not connected Internet. Please connect Internet and restart app",2);
+                    viewDialog.showDialog(mainActivity, "Your device is not connected Internet. Please connect Internet and restart app", 2);
                 }
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -110,22 +152,22 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
         mAdapter.notifyDataSetChanged();
     }
 
-    private void loadData() {
-            TaskSection taskQuestion = new TaskSection(getContext(), codenal);
-            taskQuestion.request(new Response.Listener<ArrayList<Section>>() {
-                @Override
-                public void onResponse(ArrayList<Section> response) {
-                    sectionList = response;
-                    loadList();
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    ViewDialog viewDialog = new ViewDialog();
-                    viewDialog.showDialog(mainActivity, "Your device is not connected Internet. Please connect Internet and restart app",2);
-                }
-            });
-        }
+    private void loadData(String codenal) {
+        TaskSection taskQuestion = new TaskSection(getContext(), codenal);
+        taskQuestion.request(new Response.Listener<ArrayList<Section>>() {
+            @Override
+            public void onResponse(ArrayList<Section> response) {
+                sectionList = response;
+                loadList();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                ViewDialog viewDialog = new ViewDialog();
+                viewDialog.showDialog(mainActivity, "Your device is not connected Internet. Please connect Internet and restart app", 2);
+            }
+        });
+    }
 
     @Override
     protected void initViews(View view) {
@@ -139,13 +181,12 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
 
     @Override
     public void OnClick(int index) {
-        if(checkConnect()==true){
+        if (checkConnect() == true) {
             mainActivity.onOpenFragment(FramentListenWrite.newInstance(sectionList.get(index)), true);
 //            mainActivity.checkToShowInterstitialAds();
-        }
-        else{
+        } else {
             ViewDialog viewDialog = new ViewDialog();
-            viewDialog.showDialog(mainActivity, "Your device is not connected Internet. Please connect Internet and restart app",2);
+            viewDialog.showDialog(mainActivity, "Your device is not connected Internet. Please connect Internet and restart app", 2);
         }
 
     }

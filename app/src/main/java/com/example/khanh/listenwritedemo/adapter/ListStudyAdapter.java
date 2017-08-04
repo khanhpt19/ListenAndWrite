@@ -23,6 +23,7 @@ import com.example.khanh.listenwritedemo.helper.SharePreferenceUtils;
 import com.example.khanh.listenwritedemo.module.Practice;
 import com.example.khanh.listenwritedemo.module.Section;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -44,12 +45,12 @@ public class ListStudyAdapter extends RecyclerView.Adapter<ListStudyAdapter.MyVi
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView txt_list_text;
 //        public TextView txt_list_text_translate;
-        public ImageView img_play_list_study;
+//        public ImageView img_play_list_study;
         public MyViewHolder(View view) {
             super(view);
             txt_list_text = (TextView) view.findViewById(R.id.txt_list_text);
 //            txt_list_text_translate= (TextView) view.findViewById(R.id.txt_list_text_translate);
-            img_play_list_study= (ImageView) view.findViewById(R.id.img_play_list_study);
+//            img_play_list_study= (ImageView) view.findViewById(R.id.img_play_list_study);
 
         }
     }
@@ -62,11 +63,13 @@ public class ListStudyAdapter extends RecyclerView.Adapter<ListStudyAdapter.MyVi
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-//        SharedPreferences prefs1 = context.getSharedPreferences(String.valueOf(MyPREFERENCESSTUDY), MODE_PRIVATE);
-//        String text =prefs1.getString("TEXT",null);
-        Log.d("ASKJBDAB",sectionList.size()+"");
-//        Toast.makeText(context,sectionList.size()+"",Toast.LENGTH_SHORT).show();
-//        holder.txt_list_text.setText((position+1)+": "+text);
+//        SharedPreferences prefs = context.getSharedPreferences(String.valueOf(MyPREFERENCESSTUDY), context.MODE_PRIVATE);
+//        String text=prefs.getString("TEXT",null);
+//        List<String> liststudy= new ArrayList<>();
+//        liststudy.add(text);
+//        holder.txt_list_text.setText((position+1)+": "+liststudy.get(position).toString());
+
+
         holder.txt_list_text.setText((position+1)+": "+sectionList.get(position).toString());
 
     }

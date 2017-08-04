@@ -38,12 +38,14 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.MyViewHo
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public CircleNetworkImageView imgSection;
         public TextView txtNameSection;
+        public TextView txtTitle_Translate;
         public NumberProgressBar proressbarSection;
 
         public MyViewHolder(View view) {
             super(view);
             imgSection= (CircleNetworkImageView) view.findViewById(R.id.imgSection);
             txtNameSection = (TextView) view.findViewById(R.id.txtNameSection);
+            txtTitle_Translate = (TextView) view.findViewById(R.id.txtTitle_Translate);
             proressbarSection = (NumberProgressBar) view.findViewById(R.id.proressbarSection);
         }
     }
@@ -63,7 +65,8 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.MyViewHo
 
         holder.imgSection.setImageUrl(section.getImage_url(), ImageLoaderUtils.getImageLoaderUtils(holder.imgSection.getContext()));
         holder.proressbarSection.setMax(section.getPhrases().size());
-        holder.txtNameSection.setText(section.getTitle_translate()+" ("+section.getPhrases().size()+")");
+        holder.txtNameSection.setText(section.getTitle()+" ("+section.getPhrases().size()+")");
+        holder.txtTitle_Translate.setText(section.getTitle_translate());
 
         holder.proressbarSection.setProgress(corrects);
 
