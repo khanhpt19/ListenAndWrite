@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +23,8 @@ import com.example.khanh.listenwritedemo.helper.ImageLoaderUtils;
 import com.example.khanh.listenwritedemo.helper.SharePreferenceUtils;
 import com.example.khanh.listenwritedemo.module.Practice;
 import com.example.khanh.listenwritedemo.module.Section;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,22 +39,19 @@ import static com.example.khanh.listenwritedemo.fragment.FramentListenWrite.MyPR
  */
 
 public class ListStudyAdapter extends RecyclerView.Adapter<ListStudyAdapter.MyViewHolder> {
-    private List<String> sectionList;
+    private List<String> listStudy;
     private Context context;
-    public ListStudyAdapter(List<String> sectionList) {
-        this.sectionList = sectionList;
+    CallBack callBack;
+    public ListStudyAdapter(List<String> listStudy, CallBack callBack) {
+        this.listStudy = listStudy;
+        this.callBack=callBack;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView txt_list_text;
-//        public TextView txt_list_text_translate;
-//        public ImageView img_play_list_study;
+        TextView txt_list_text;
         public MyViewHolder(View view) {
             super(view);
             txt_list_text = (TextView) view.findViewById(R.id.txt_list_text);
-//            txt_list_text_translate= (TextView) view.findViewById(R.id.txt_list_text_translate);
-//            img_play_list_study= (ImageView) view.findViewById(R.id.img_play_list_study);
-
         }
     }
 
@@ -63,19 +63,22 @@ public class ListStudyAdapter extends RecyclerView.Adapter<ListStudyAdapter.MyVi
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-//        SharedPreferences prefs = context.getSharedPreferences(String.valueOf(MyPREFERENCESSTUDY), context.MODE_PRIVATE);
-//        String text=prefs.getString("TEXT",null);
-//        List<String> liststudy= new ArrayList<>();
-//        liststudy.add(text);
-//        holder.txt_list_text.setText((position+1)+": "+liststudy.get(position).toString());
+        holder.txt_list_text.setText(listStudy.get(position));
 
-
-        holder.txt_list_text.setText((position+1)+": "+sectionList.get(position).toString());
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callBack.OnClick(position);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return sectionList.size();
+        return listStudy.size();
+    }
+
+    public interface CallBack {
+        void OnClick(int indexx);
     }
 }

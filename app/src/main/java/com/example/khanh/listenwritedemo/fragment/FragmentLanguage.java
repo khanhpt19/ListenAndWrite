@@ -43,7 +43,7 @@ public class FragmentLanguage extends FragmentBase implements LanguageAdapter.Ca
     protected void initDataDefault() {
         super.initDataDefault();
         toolbar.setTitle("Choose language");
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        toolbar.setNavigationIcon(R.drawable.ic_left);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

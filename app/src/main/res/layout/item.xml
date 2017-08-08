@@ -38,7 +38,6 @@
                     android:src="@drawable/circle_shape"/>
             </RelativeLayout>
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,13 +45,26 @@
                 android:layout_marginRight="10dp"
                 android:layout_gravity="center"
                 android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txtNameSection"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Section 1"
-                    android:textSize="18sp" />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/txtNameSection"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Section 1"
+                        android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/txtNumphraseSection"
+                        android:layout_width="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+
                 <TextView
                     android:id="@+id/txtTitle_Translate"
                     android:layout_width="match_parent"

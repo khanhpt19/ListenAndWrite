@@ -23,7 +23,7 @@ public class FragmentFollow extends FragmentBase{
     protected void initDataDefault() {
         super.initDataDefault();
         toolbar.setTitle("Follow us");
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        toolbar.setNavigationIcon(R.drawable.ic_left);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -18,12 +18,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.khanh.listenwritedemo.R;
 import com.example.khanh.listenwritedemo.helper.AnimHelper;
 import com.example.khanh.listenwritedemo.adapter.MyFragmentPagerAdapter;
 import com.example.khanh.listenwritedemo.helper.NonSwipeableViewPager;
+import com.example.khanh.listenwritedemo.helper.SharePreferenceUtils;
 import com.example.khanh.listenwritedemo.module.Section;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.skyfishjy.library.RippleBackground;
 
 import java.util.ArrayList;
@@ -40,12 +44,8 @@ import static com.example.khanh.listenwritedemo.R.color.colorOrane;
  */
 
 public class FramentListenWrite extends FragmentBase {
-    //    @InjectView(R.id.adsContainer)
-//    FrameLayout adsContainer;
     @InjectView(R.id.viewpager)
     NonSwipeableViewPager viewpager;
-    @InjectView(R.id.imgAdd)
-    ImageView imgAdd;
     @InjectView(R.id.imgCheck)
     ImageView imgCheck;
     @InjectView(R.id.toolbar)
@@ -64,12 +64,12 @@ public class FramentListenWrite extends FragmentBase {
     TextView tvhint;
     @InjectView(R.id.txtShowResult)
     TextView txtShowResult;
-
+    List<String> corrects;
+    List<String> mistakes;
     private MyFragmentPagerAdapter myFragmentPagerAdapter;
     private ArrayList<Fragment> listFragment = new ArrayList<>();
 
     SharedPreferences sharedpreferences;
-    SharedPreferences sharedpreferences1;
     public static final int MyPREFERENCES = 0;
     public static final int MyPREFERENCESSTUDY = 0;
     int index, dem = 0, dem1 = 0;
@@ -77,9 +77,11 @@ public class FramentListenWrite extends FragmentBase {
     @InjectView(R.id.txtAnswer)
     EditText txtAnswer;
     Handler mHandler = new Handler();
-    int ncorrects = 0, nmistakes = 0, k, f;
+    int ncorrects = 0, nmistakes = 0, k;
 
-    List<String> liststudy = new ArrayList<>();
+    List<String> listcorrect ;
+    List<String> listmistake ;
+
     List<String> acorrects = new ArrayList<>();
     List<String> amistakes = new ArrayList<>();
 
@@ -89,9 +91,10 @@ public class FramentListenWrite extends FragmentBase {
 
         Bundle bundle = getArguments();
         section = (Section) bundle.getSerializable("SECTION");
+
         index = section.getId();
         toolbar.setTitle(section.getTitle());
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        toolbar.setNavigationIcon(R.drawable.ic_left);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,7 +107,9 @@ public class FramentListenWrite extends FragmentBase {
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                mainActivity.onOpenFragment(FragmentListStudy.newInstance(liststudy), true);
+                if (SharePreferenceUtils.getString(mainActivity, "sizecorrect_" + index) != null
+                        || SharePreferenceUtils.getString(mainActivity, "sizemistake_" + index) != null)
+                    mainActivity.onOpenFragment(FragmentListStudy.newInstance(section, listcorrect, listmistake, k), true);
                 return false;
             }
         });
@@ -139,6 +144,17 @@ public class FramentListenWrite extends FragmentBase {
         return fragmenT2;
     }
 
+    public static FramentListenWrite newInstance2(int k, int index) {
+        FramentListenWrite fragmenT2 = new FramentListenWrite();
+        Bundle bundle = new Bundle();
+
+        bundle.putInt("k", k);
+        bundle.putInt("indexk", index);
+
+        fragmenT2.setArguments(bundle);
+        return fragmenT2;
+    }
+
     @Override
     protected int getLayout() {
         return R.layout.fragment_write_listen;
@@ -155,7 +171,7 @@ public class FramentListenWrite extends FragmentBase {
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
     }
 
-    @OnClick({R.id.btnNext, R.id.btnHelp, R.id.imgHinh, R.id.txtAnswer, R.id.imgAdd, R.id.btnMean})
+    @OnClick({R.id.btnNext, R.id.btnHelp, R.id.imgHinh, R.id.txtAnswer, R.id.btnMean})
     public void onClick(View v) {
         k = viewpager.getCurrentItem();
 
@@ -186,7 +202,7 @@ public class FramentListenWrite extends FragmentBase {
         String b = section.getPhrases().get(k).getText().toString();
 
         if (v.getId() == R.id.btnMean) {
-            if(section.getPhrases().get(k).getText_translate()!=null)
+            if (section.getPhrases().get(k).getText_translate() != null)
                 txtShowResult.setText(section.getPhrases().get(k).getText_translate());
             else
                 txtShowResult.setText(section.getPhrases().get(k).getText());
@@ -198,46 +214,9 @@ public class FramentListenWrite extends FragmentBase {
                 }
             }, 9000);
         }
-        if (v.getId() == R.id.imgAdd) {
-            sharedpreferences1 = getContext().getSharedPreferences(String.valueOf(MyPREFERENCESSTUDY), MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedpreferences1.edit();
-            if(section.getPhrases().get(k).getText_translate()!=null){
-                if (dem1 % 2 == 0) {
-                    liststudy.add(section.getPhrases().get(k).getText().toString() + "\n    " + section.getPhrases().get(k).getText_translate().toString());
-                    imgAdd.setImageResource(R.drawable.ic_added);
-                    toast(section.getPhrases().get(k).getText().toString() + "  added successfully.");
-                    editor.putString("TEXT", liststudy.toString());
-                } else {
-                    liststudy.remove(section.getPhrases().get(k).getText().toString() + "\n    " + section.getPhrases().get(k).getText_translate().toString());
-                    imgAdd.setImageResource(R.drawable.ic_add);
-                    toast(section.getPhrases().get(k).getText().toString() + "  removed successfully.");
-                    editor.putString("TEXT", null);
-                }
-            }
-            else{
-                if (dem1 % 2 == 0) {
-                    liststudy.add(section.getPhrases().get(k).getText().toString() );
-                    imgAdd.setImageResource(R.drawable.ic_added);
-                    toast(section.getPhrases().get(k).getText().toString() + "  added successfully.");
-                    editor.putString("TEXT", liststudy.toString());
-                } else {
-                    liststudy.remove(section.getPhrases().get(k).getText().toString() );
-                    imgAdd.setImageResource(R.drawable.ic_add);
-                    toast(section.getPhrases().get(k).getText().toString() + "  removed successfully.");
-                    editor.putString("TEXT", null);
-                }
-            }
-
-
-            editor.apply();
-            editor.commit();
-            dem1++;
-//            SharePreferenceUtils.setString(mainActivity,"TEXT",section.getPhrases().get(k).getText().toString());
-        }
 
         if (v.getId() == R.id.btnNext) {
             dem++;
-            imgAdd.setImageResource(R.drawable.ic_add);
             if (dem % 2 == 1) {
                 btnNext.setText("Next");
                 btnNext.setBackgroundResource(R.color.colorGreen);
@@ -299,6 +278,18 @@ public class FramentListenWrite extends FragmentBase {
         mp.start();
         ncorrects++;
         acorrects.add(b1);
+
+        listmistake = new Gson().fromJson(SharePreferenceUtils.getString(getContext(), "listmistake_" + section.getId()), new TypeToken<ArrayList<String>>() {
+        }.getType());
+        if (listmistake.size() != 0) {
+            if (listmistake.contains(b1))
+                listmistake.remove(b1);
+        }
+
+        listcorrect.add(b1);
+        SharePreferenceUtils.setString(mainActivity, "sizecorrect_" + section.getId(), listcorrect.size() + "");
+        SharePreferenceUtils.setString(mainActivity, "listcorrect_" + section.getId(), new Gson().toJson(listcorrect));
+
         imgCheck.setVisibility(View.VISIBLE);
         imgCheck.setImageResource(R.drawable.ic_done);
         txtShowResult.setText(section.getPhrases().get(k).getText().toString());
@@ -318,6 +309,19 @@ public class FramentListenWrite extends FragmentBase {
         mp.start();
         nmistakes++;
         amistakes.add(b1);
+
+        listcorrect = new Gson().fromJson(SharePreferenceUtils.getString(getContext(), "listcorrect_" + section.getId()), new TypeToken<ArrayList<String>>() {
+        }.getType());
+        if (listcorrect.size() != 0) {
+            if (listcorrect.contains(b1))
+                listcorrect.remove(b1);
+        }
+
+
+        listmistake.add(b1);
+        SharePreferenceUtils.setString(mainActivity, "sizemistake_" + section.getId(), listmistake.size() + "");
+        SharePreferenceUtils.setString(mainActivity, "listmistake_" + section.getId(), new Gson().toJson(listmistake));
+
         imgCheck.setVisibility(View.VISIBLE);
         imgCheck.setImageResource(R.drawable.ic_clear);
         txtShowResult.setText(section.getPhrases().get(k).getText().toString());
@@ -355,8 +359,6 @@ public class FramentListenWrite extends FragmentBase {
         try {
             Uri uri = Uri.parse(section.getPhrases().get(kb).getAudio_url().toString());
             final MediaPlayer player = new MediaPlayer();
-//            float speed=0.75f;
-//            player.setPlaybackParams(player.getPlaybackParams().setSpeed(speed));
             player.setAudioStreamType(AudioManager.STREAM_MUSIC);
             player.setDataSource(mainActivity, uri);
             player.prepare();

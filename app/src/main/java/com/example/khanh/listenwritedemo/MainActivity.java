@@ -43,8 +43,6 @@ import butterknife.InjectView;
 
 
 public class MainActivity extends ActivityBase implements NavigationView.OnNavigationItemSelectedListener {
-//    @InjectView(R.id.adsContainer)
-//    FrameLayout adsContainer;
     private boolean doubleBackToExitPressedOnce = false;
     private Fragment curFragment;
     private String categoryCurrent;
@@ -58,13 +56,6 @@ public class MainActivity extends ActivityBase implements NavigationView.OnNavig
         setContentView(R.layout.activity_main2);
         ButterKnife.inject(this); // Init views
         onOpenFragment(new FragmentSection(), false);
-//        if(checkConnect()==true){
-//            onOpenFragment(new FragmentSection(), false);
-//        }
-//        else{
-//            ViewDialog viewDialog = new ViewDialog();
-//            viewDialog.showDialog((Activity) getApplicationContext(), "Your device is not connected Internet. Please connect Internet and restart app",2);
-//        }
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
@@ -73,16 +64,9 @@ public class MainActivity extends ActivityBase implements NavigationView.OnNavig
         TextView txtchamngon = (TextView) header.findViewById(R.id.txtchamngon);
         Typeface face = Typeface.createFromAsset(getAssets(), "font/DancingScript.ttf");
         txtchamngon.setTypeface(face);
-//        initBannerAds(adsContainer);
-
 
 //        full screen
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//        StasusBar Color
-//        if (Build.VERSION.SDK_INT >= 21) {
-//            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colorBlue));
-//        }
     }
 
     public void setUpToolbar(Toolbar toolbar) {
@@ -200,14 +184,5 @@ public class MainActivity extends ActivityBase implements NavigationView.OnNavig
 
     public void superBackPress() {
         super.onBackPressed();
-    }
-
-    public boolean checkConnect() {
-        ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-            return true;
-        }
-        return false;
     }
 }

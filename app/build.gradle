@@ -41,5 +41,6 @@ dependencies {
     compile 'com.facebook.android:audience-network-sdk:4.23.0'
 
     compile 'com.daimajia.numberprogressbar:library:1.4@aar'
+    compile 'com.txusballesteros:bubbles:1.2.1'
 
 }

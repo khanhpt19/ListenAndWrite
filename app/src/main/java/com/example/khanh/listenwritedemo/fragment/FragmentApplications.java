@@ -36,7 +36,7 @@ public class FragmentApplications extends FragmentBase implements ApplicationsAd
     protected void initDataDefault() {
         super.initDataDefault();
         toolbar.setTitle("Our Applications");
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        toolbar.setNavigationIcon(R.drawable.ic_left);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

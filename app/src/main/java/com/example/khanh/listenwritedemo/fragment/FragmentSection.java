@@ -7,18 +7,14 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -27,11 +23,11 @@ import com.example.khanh.listenwritedemo.adapter.SectionAdapter;
 import com.example.khanh.listenwritedemo.helper.SharePreferenceUtils;
 import com.example.khanh.listenwritedemo.helper.ViewDialog;
 import com.example.khanh.listenwritedemo.module.Config;
-import com.example.khanh.listenwritedemo.module.Language;
 import com.example.khanh.listenwritedemo.module.ListLang;
 import com.example.khanh.listenwritedemo.module.Section;
 import com.example.khanh.listenwritedemo.request.TaskSection;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,15 +35,12 @@ import java.util.List;
 import butterknife.InjectView;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.khanh.listenwritedemo.fragment.FragmentLanguage.PREFERENCES;
 
 /**
  * Created by khanh on 7/18/2017.
  */
 
 public class FragmentSection extends FragmentBase implements SectionAdapter.CallBack {
-    @InjectView(R.id.adsContainer)
-    FrameLayout adsContainer;
     @InjectView(R.id.toolbar)
     Toolbar toolbar;
     @InjectView(R.id.recycler_view)
@@ -59,10 +52,9 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
     @InjectView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
     SharedPreferences spreferences;
-    SharedPreferences prefs;
     int MYPRE=0;
-    int dem = 0;
     Config config;
+
     @Override
     protected void initDataDefault() {
         super.initDataDefault();
@@ -99,13 +91,9 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
                                 SharedPreferences.Editor editor = spreferences.edit();
                                 editor.putString("code", listLang.get(which).getCode());
                                 editor.commit();
-//                                SharePreferenceUtils.setString(mainActivity,"CODE",code);
                             }
                         });
                         builder.show();
-
-//                        mainActivity.onOpenFragment(FragmentLanguage.newInstance(name), true);
-//                        dem++;
                     } else {
                         ViewDialog viewDialog = new ViewDialog();
                         viewDialog.showDialog(mainActivity, "Your device is not connected Internet. Please connect Internet and restart app", 2);
@@ -116,13 +104,15 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
             }
         });
 
-//        SharedPreferences prefs1 = getContext().getSharedPreferences(String.valueOf(PREFERENCES), Context.MODE_PRIVATE);
-//        codenal = prefs1.getString("code", "");
-//        SharePreferenceUtils.getString(mainActivity,"code");
-//        toast(SharePreferenceUtils.getString(mainActivity,"code"));
         final SharedPreferences prefs = mainActivity.getSharedPreferences(String.valueOf(MYPRE), MODE_PRIVATE);
 
         name= prefs.getString("code",null);
+        String s= SharePreferenceUtils.getString(getContext(),"SECTION");
+        sectionList=new Gson().fromJson(s,new TypeToken<List<Section>>() {}.getType());
+        if(sectionList!= null){
+            loadList();
+        }
+        else
         loadData(name);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -131,7 +121,6 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
                 if (checkConnect() == true) {
                     name= prefs.getString("code",null);
                     loadData(name);
-                    loadData(name);
                 } else {
                     ViewDialog viewDialog = new ViewDialog();
                     viewDialog.showDialog(mainActivity, "Your device is not connected Internet. Please connect Internet and restart app", 2);
@@ -139,7 +128,6 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-        mainActivity.initBannerAds(adsContainer);
     }
 
     private void loadList() {
@@ -157,6 +145,8 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
         taskQuestion.request(new Response.Listener<ArrayList<Section>>() {
             @Override
             public void onResponse(ArrayList<Section> response) {
+                SharePreferenceUtils.setString(getContext(),"SECTION",new Gson().toJson(response));
+
                 sectionList = response;
                 loadList();
             }

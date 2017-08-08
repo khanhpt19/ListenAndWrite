@@ -22,7 +22,7 @@ public class TaskConfig extends TaskBase<Config>{
 
     @Override
     protected String getBaseUrl() {
-        return "https://api.myjson.com/bins/hmo49";
+        return "http://avid-heading-737.appspot.com/transcript/_config/vocabulary/android_v1.txt";
     }
 
     @Override

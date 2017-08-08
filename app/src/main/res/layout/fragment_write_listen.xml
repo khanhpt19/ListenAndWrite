@@ -6,7 +6,7 @@
     android:background="@color/colorWhite"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -76,8 +76,8 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_alignEnd="@+id/tv_hint"
-                    android:background="@drawable/ic_help"
-                    android:layout_alignRight="@+id/tv_hint" />
+                    android:layout_alignRight="@+id/tv_hint"
+                    android:background="@drawable/ic_help" />
             </RelativeLayout>
 
             <TextView
@@ -89,44 +89,26 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="110dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
                 android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                <ImageView
+                    android:id="@+id/btnMean"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imgAdd"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_gravity="center|right"
-                        android:src="@drawable/ic_add" />
-
-                    <ImageView
-                        android:id="@+id/btnMean"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center|right"
-                        android:layout_marginBottom="10dp"
-                        android:src="@drawable/ic_pen" />
-
-                </LinearLayout>
+                    android:src="@drawable/ic_g_translate" />
 
                 <com.skyfishjy.library.RippleBackground
                     android:id="@+id/ripple"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="45dp"
                     android:layout_weight="1"
                     app:rb_color="@color/colorBlue"
-                    android:layout_gravity="center"
                     app:rb_duration="1000"
-                    android:layout_marginRight="45dp"
                     app:rb_radius="10dp"
                     app:rb_rippleAmount="4">
 
@@ -138,9 +120,7 @@
                         android:src="@drawable/ic_play_circle_filled" />
                 </com.skyfishjy.library.RippleBackground>
 
-
             </LinearLayout>
-
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -150,14 +130,14 @@
                     android:id="@+id/imgCheck"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_toLeftOf="@+id/txtShowResult"/>
+                    android:layout_toLeftOf="@+id/txtShowResult" />
 
                 <TextView
                     android:id="@+id/txtShowResult"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="5dp"
                     android:layout_centerInParent="true"
+                    android:layout_marginLeft="5dp"
                     android:textSize="15dp" />
             </RelativeLayout>
 
@@ -179,10 +159,11 @@
                     android:layout_marginBottom="0dp"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
-                    android:soundEffectsEnabled="true"
                     android:backgroundTint="#00a2ff"
                     android:hint="Enter the answer"
-                    android:inputType="textCapSentences" />
+                    android:inputType="textCapSentences"
+                    android:soundEffectsEnabled="true" />
+
                 <Button
                     android:id="@+id/btnNext"
                     android:layout_width="wrap_content"

@@ -35,7 +35,7 @@ public class FragmentResult extends FragmentBase {
         super.initDataDefault();
         Bundle bundle = getArguments();
         toolbar.setTitle("Result");
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        toolbar.setNavigationIcon(R.drawable.ic_left);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
