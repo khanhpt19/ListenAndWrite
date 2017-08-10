@@ -43,7 +43,7 @@ public class FragmentListStudy extends FragmentBase implements ListStudyAdapter.
     private ListStudyAdapter mAdapter;
     private ListAdapterWrong nAdapter;
     Section section;
-    int k;
+    int k,kk;
 
     @Override
     protected void initDataDefault() {
@@ -105,7 +105,7 @@ public class FragmentListStudy extends FragmentBase implements ListStudyAdapter.
 
     @Override
     public void OnClick(int indexx) {
-//        mainActivity.onOpenFragment(FramentListenWrite.newInstance2(k,section.getId()), true);
-        toast("Clicked");
+        mainActivity.onOpenFragment(FramentListenWrite.newInstance(section), true);
+//        mainActivity.onOpenFragment(FramentListenWrite.newInstance2(section,kk), true);
     }
 }

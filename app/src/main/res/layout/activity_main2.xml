@@ -19,7 +19,6 @@
             <!--android:layout_alignParentBottom="true" />-->
         <!--android:layout_above="@id/adsContainer"-->
 
-
         <FrameLayout
             android:id="@+id/container"
             android:layout_width="match_parent"

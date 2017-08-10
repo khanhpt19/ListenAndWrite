@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -64,8 +65,6 @@ public class FramentListenWrite extends FragmentBase {
     TextView tvhint;
     @InjectView(R.id.txtShowResult)
     TextView txtShowResult;
-    List<String> corrects;
-    List<String> mistakes;
     private MyFragmentPagerAdapter myFragmentPagerAdapter;
     private ArrayList<Fragment> listFragment = new ArrayList<>();
 
@@ -77,10 +76,10 @@ public class FramentListenWrite extends FragmentBase {
     @InjectView(R.id.txtAnswer)
     EditText txtAnswer;
     Handler mHandler = new Handler();
-    int ncorrects = 0, nmistakes = 0, k;
+    int ncorrects = 0, nmistakes = 0, k,h=0;
 
-    List<String> listcorrect ;
-    List<String> listmistake ;
+    List<String> listcorrect = new ArrayList<>();
+    List<String> listmistake = new ArrayList<>();
 
     List<String> acorrects = new ArrayList<>();
     List<String> amistakes = new ArrayList<>();
@@ -92,13 +91,16 @@ public class FramentListenWrite extends FragmentBase {
         Bundle bundle = getArguments();
         section = (Section) bundle.getSerializable("SECTION");
 
+        h=bundle.getInt("current");
+
         index = section.getId();
         toolbar.setTitle(section.getTitle());
         toolbar.setNavigationIcon(R.drawable.ic_left);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.onBackPressed();
+                goToHome();
+//                mainActivity.onBackPressed();
             }
         });
         loadList();
@@ -115,6 +117,15 @@ public class FramentListenWrite extends FragmentBase {
         });
         progressbar.setMax(section.getPhrases().size());
         txtNumCorrects.setText("0/" + section.getPhrases().size());
+    }
+
+
+    public void goToHome() {
+//        FragmentManager fm = getSupportFragmentManager();
+        FragmentManager fm = mainActivity.getSupportFragmentManager();
+        for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+            fm.popBackStack();
+        }
     }
 
     private void loadList() {
@@ -144,12 +155,12 @@ public class FramentListenWrite extends FragmentBase {
         return fragmenT2;
     }
 
-    public static FramentListenWrite newInstance2(int k, int index) {
+    public static FramentListenWrite newInstance2(Section section,int k) {
         FramentListenWrite fragmenT2 = new FramentListenWrite();
         Bundle bundle = new Bundle();
 
-        bundle.putInt("k", k);
-        bundle.putInt("indexk", index);
+        bundle.putSerializable("SECTION", section);
+        bundle.putInt("current",k);
 
         fragmenT2.setArguments(bundle);
         return fragmenT2;
@@ -173,7 +184,10 @@ public class FramentListenWrite extends FragmentBase {
 
     @OnClick({R.id.btnNext, R.id.btnHelp, R.id.imgHinh, R.id.txtAnswer, R.id.btnMean})
     public void onClick(View v) {
-        k = viewpager.getCurrentItem();
+//        if(h==0)
+            k = viewpager.getCurrentItem();
+//        else
+//            k=h;
 
         if (v.getId() == R.id.imgHinh) {
             playmedia(k);
@@ -254,7 +268,6 @@ public class FramentListenWrite extends FragmentBase {
                     }
                 }
                 runthread();
-                txtAnswer.setText("");
             } else {
                 viewpager.setCurrentItem(k + 1);
                 txtAnswer.setText("");
@@ -270,6 +283,7 @@ public class FramentListenWrite extends FragmentBase {
                 mainActivity.onOpenFragment(FragmentResult.newInstance(acorrects, amistakes), true);
                 sharepref();
             }
+            SharePreferenceUtils.setString(mainActivity, "correct_" + section.getId(), String.valueOf(ncorrects));
         }
     }
 
@@ -281,14 +295,28 @@ public class FramentListenWrite extends FragmentBase {
 
         listmistake = new Gson().fromJson(SharePreferenceUtils.getString(getContext(), "listmistake_" + section.getId()), new TypeToken<ArrayList<String>>() {
         }.getType());
-        if (listmistake.size() != 0) {
-            if (listmistake.contains(b1))
-                listmistake.remove(b1);
+        listcorrect = new Gson().fromJson(SharePreferenceUtils.getString(getContext(), "listcorrect_" + section.getId()), new TypeToken<ArrayList<String>>() {
+        }.getType());
+        List<String> correct2 = new ArrayList<>();
+        List<String> mistake2 = new ArrayList<>();
+        try {
+            for (int i = 0; i < listcorrect.size(); i++) {
+                if (!listcorrect.get(i).equals(b1)) {
+                    correct2.add(listcorrect.get(i));
+                }
+            }
+            for (int i = 0; i < listmistake.size(); i++) {
+                if (!listmistake.get(i).equals(b1)) {
+                    mistake2.add(listmistake.get(i));
+                }
+            }
+        } catch (Exception e) {
         }
-
-        listcorrect.add(b1);
-        SharePreferenceUtils.setString(mainActivity, "sizecorrect_" + section.getId(), listcorrect.size() + "");
-        SharePreferenceUtils.setString(mainActivity, "listcorrect_" + section.getId(), new Gson().toJson(listcorrect));
+        correct2.add(b1);
+        SharePreferenceUtils.setString(mainActivity,"kk_"+section.getId(),String.valueOf(k));
+        SharePreferenceUtils.setString(mainActivity, "sizecorrect_" + section.getId(), correct2.size() + "");
+        SharePreferenceUtils.setString(mainActivity, "listmistake_" + section.getId(), new Gson().toJson(mistake2));
+        SharePreferenceUtils.setString(mainActivity, "listcorrect_" + section.getId(), new Gson().toJson(correct2));
 
         imgCheck.setVisibility(View.VISIBLE);
         imgCheck.setImageResource(R.drawable.ic_done);
@@ -310,17 +338,31 @@ public class FramentListenWrite extends FragmentBase {
         nmistakes++;
         amistakes.add(b1);
 
+        listmistake = new Gson().fromJson(SharePreferenceUtils.getString(getContext(), "listmistake_" + section.getId()), new TypeToken<ArrayList<String>>() {
+        }.getType());
         listcorrect = new Gson().fromJson(SharePreferenceUtils.getString(getContext(), "listcorrect_" + section.getId()), new TypeToken<ArrayList<String>>() {
         }.getType());
-        if (listcorrect.size() != 0) {
-            if (listcorrect.contains(b1))
-                listcorrect.remove(b1);
+
+        List<String> correct2 = new ArrayList<>();
+        List<String> mistake2 = new ArrayList<>();
+        try {
+            for (int i = 0; i < listcorrect.size(); i++) {
+                if (!listcorrect.get(i).equals(b1)) {
+                    correct2.add(listcorrect.get(i));
+                }
+            }
+            for (int i = 0; i < listmistake.size(); i++) {
+                if (!listmistake.get(i).equals(b1)) {
+                    mistake2.add(listmistake.get(i));
+                }
+            }
+        } catch (Exception e) {
         }
-
-
-        listmistake.add(b1);
-        SharePreferenceUtils.setString(mainActivity, "sizemistake_" + section.getId(), listmistake.size() + "");
-        SharePreferenceUtils.setString(mainActivity, "listmistake_" + section.getId(), new Gson().toJson(listmistake));
+        mistake2.add(b1);
+        SharePreferenceUtils.setString(mainActivity,"kk_"+section.getId(),String.valueOf(k));
+        SharePreferenceUtils.setString(mainActivity, "sizemistake_" + section.getId(), mistake2.size() + "");
+        SharePreferenceUtils.setString(mainActivity, "listmistake_" + section.getId(), new Gson().toJson(mistake2));
+        SharePreferenceUtils.setString(mainActivity, "listcorrect_" + section.getId(), new Gson().toJson(correct2));
 
         imgCheck.setVisibility(View.VISIBLE);
         imgCheck.setImageResource(R.drawable.ic_clear);

@@ -156,31 +156,41 @@ public class MainActivity extends ActivityBase implements NavigationView.OnNavig
         }
     }
 
-    //     Optional for press again to exit app
-    @Override
-    public void onBackPressed() {
-        FragmentManager fm = getSupportFragmentManager();
 
-        if (fm.getBackStackEntryCount() > 0) {
-            superBackPress();
-            return;
-        }
-        if (doubleBackToExitPressedOnce || fm.getBackStackEntryCount() != 0) {
-            super.onBackPressed();
-            return;
-        }
+//     back to home
+//    public void goToHome() {
+//        FragmentManager fm = getSupportFragmentManager();
+//        FragmentManager fm = mainActivity.getSupportFragmentManager();
+//        for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+//            fm.popBackStack();
+//        }
+//    }
 
-        this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show();
-
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce = false;
-            }
-        }, 2000);
-    }
+//         Optional for press again to exit app
+//    @Override
+//    public void onBackPressed() {
+//        FragmentManager fm = getSupportFragmentManager();
+//
+//        if (fm.getBackStackEntryCount() > 0) {
+//            superBackPress();
+//            return;
+//        }
+//        if (doubleBackToExitPressedOnce || fm.getBackStackEntryCount() != 0) {
+//            super.onBackPressed();
+//            return;
+//        }
+//
+//        this.doubleBackToExitPressedOnce = true;
+//        Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show();
+//
+//        new Handler().postDelayed(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                doubleBackToExitPressedOnce = false;
+//            }
+//        }, 2000);
+//    }
 
     public void superBackPress() {
         super.onBackPressed();

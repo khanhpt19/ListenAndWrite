@@ -66,9 +66,7 @@
                     android:background="#ff8204"
                     android:gravity="center"
                     android:padding="@dimen/padding_large"
-                    android:text="asdasdsa"
                     android:textColor="@android:color/white"
-                    android:textSize="16sp"
                     android:visibility="invisible" />
 
                 <Button
@@ -89,7 +87,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="110dp"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
 
@@ -124,21 +122,20 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/imgCheck"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_toLeftOf="@+id/txtShowResult" />
 
                 <TextView
                     android:id="@+id/txtShowResult"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_marginLeft="5dp"
-                    android:textSize="15dp" />
+                    android:layout_marginLeft="5dp" />
             </RelativeLayout>
 
             <com.example.khanh.listenwritedemo.helper.NonSwipeableViewPager

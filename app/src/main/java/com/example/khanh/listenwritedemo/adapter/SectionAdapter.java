@@ -29,6 +29,7 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.MyViewHo
     private List<Section> sectionList;
     CallBack callBack;
     private Context context;
+
     public SectionAdapter(List<Section> sectionList, CallBack callBack, Context context) {
         this.sectionList = sectionList;
         this.callBack = callBack;
@@ -44,7 +45,7 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.MyViewHo
 
         public MyViewHolder(View view) {
             super(view);
-            imgSection= (CircleNetworkImageView) view.findViewById(R.id.imgSection);
+            imgSection = (CircleNetworkImageView) view.findViewById(R.id.imgSection);
             txtNameSection = (TextView) view.findViewById(R.id.txtNameSection);
             txtTitle_Translate = (TextView) view.findViewById(R.id.txtTitle_Translate);
             txtNumphraseSection = (TextView) view.findViewById(R.id.txtNumphraseSection);
@@ -65,12 +66,23 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.MyViewHo
         SharedPreferences prefs = context.getSharedPreferences(String.valueOf(MyPREFERENCES), MODE_PRIVATE);
         int corrects = prefs.getInt("corrects_" + section.getId(), 0);
 
+        if(corrects==0){
+            holder.proressbarSection.setProgress(0);
+            try {
+                int correct = Integer.parseInt(SharePreferenceUtils.getString(context, "correct_"+section.getId()));
+                if(correct!=0)
+                holder.proressbarSection.setProgress(correct);
+            } catch (Exception e) {
+            }
+        }
+        else
+            holder.proressbarSection.setProgress(corrects);
+
         holder.imgSection.setImageUrl(section.getImage_url(), ImageLoaderUtils.getImageLoaderUtils(holder.imgSection.getContext()));
         holder.proressbarSection.setMax(section.getPhrases().size());
         holder.txtNameSection.setText(section.getTitle());
         holder.txtTitle_Translate.setText(section.getTitle_translate());
-        holder.txtNumphraseSection.setText(section.getPhrases().size()+"");
-        holder.proressbarSection.setProgress(corrects);
+        holder.txtNumphraseSection.setText(section.getPhrases().size() + "");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
