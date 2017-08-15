@@ -30,7 +30,6 @@ public class FragmentFollow extends FragmentBase{
                 mainActivity.onBackPressed();
             }
         });
-
     }
     @Override
     protected void initViews(View view) {

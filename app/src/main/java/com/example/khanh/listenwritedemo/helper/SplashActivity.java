@@ -25,6 +25,7 @@ import com.example.khanh.listenwritedemo.module.Config;
 import com.example.khanh.listenwritedemo.R;
 import com.example.khanh.listenwritedemo.request.TaskConfig;
 import com.google.gson.Gson;
+import com.victor.loading.newton.NewtonCradleLoading;
 
 import org.json.JSONObject;
 
@@ -38,6 +39,13 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         getSetting();
+
+        NewtonCradleLoading newtonCradleLoading;
+        newtonCradleLoading = (NewtonCradleLoading)findViewById(R.id.newton_cradle_loading);
+        newtonCradleLoading.start();
+        newtonCradleLoading.setLoadingColor(R.color.colorWhite);
+        newtonCradleLoading.setLoadingColor(getResources().getColor(R.color.colorWhite));
+
     }
 
     private void getSetting() {

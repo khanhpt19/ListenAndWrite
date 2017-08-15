@@ -54,7 +54,9 @@ public class MainActivity extends ActivityBase implements NavigationView.OnNavig
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        ButterKnife.inject(this); // Init views
+        ButterKnife.inject(this);
+
+        // Init views
         onOpenFragment(new FragmentSection(), false);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);

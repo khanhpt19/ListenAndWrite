@@ -31,8 +31,7 @@
                     android:id="@+id/imgSection"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:layout_margin="10dp"
-                    android:src="@drawable/letlearn" />
+                    android:layout_margin="10dp" />
 
                 <ImageView
                     android:layout_width="90dp"
@@ -69,7 +68,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_mode_comment" />
+                            android:src="@drawable/ic_label" />
 
                         <TextView
                             android:id="@+id/txtNumphraseSection"
@@ -77,6 +76,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:layout_marginLeft="5dp"
+                            android:layout_marginTop="3dp"
                             android:textColor="#FFFFFF"
                             android:textSize="12sp" />
 

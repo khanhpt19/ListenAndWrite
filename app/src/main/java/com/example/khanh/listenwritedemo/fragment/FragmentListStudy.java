@@ -21,7 +21,6 @@ import com.example.khanh.listenwritedemo.request.TaskSection;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import static com.example.khanh.listenwritedemo.fragment.FramentListenWrite.MyPREFERENCESSTUDY;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +42,7 @@ public class FragmentListStudy extends FragmentBase implements ListStudyAdapter.
     private ListStudyAdapter mAdapter;
     private ListAdapterWrong nAdapter;
     Section section;
-    int k,kk;
+    int k, kk;
 
     @Override
     protected void initDataDefault() {
@@ -67,8 +66,14 @@ public class FragmentListStudy extends FragmentBase implements ListStudyAdapter.
         RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(getContext());
         rv_list_study_wrong.setLayoutManager(layoutManager2);
 
-        List<String> corrects = new Gson().fromJson(SharePreferenceUtils.getString(getContext(), "listcorrect_" + section.getId()), new TypeToken<ArrayList<String>>() {}.getType());
-        List<String> mistakes = new Gson().fromJson(SharePreferenceUtils.getString(getContext(), "listmistake_" + section.getId()), new TypeToken<ArrayList<String>>() {}.getType());
+        List<String> corrects = new Gson().fromJson(SharePreferenceUtils.getString(getContext(), "listcorrect_" + section.getId()), new TypeToken<ArrayList<String>>() {
+        }.getType());
+        List<String> mistakes = new Gson().fromJson(SharePreferenceUtils.getString(getContext(), "listmistake_" + section.getId()), new TypeToken<ArrayList<String>>() {
+        }.getType());
+        List<Integer> listk = new Gson().fromJson(SharePreferenceUtils.getString(getContext(), "listk" + section.getId()), new TypeToken<ArrayList<Integer>>() {
+        }.getType());
+
+
         mAdapter = new ListStudyAdapter(corrects, this);
         nAdapter = new ListAdapterWrong(mistakes, this);
         if (SharePreferenceUtils.getString(mainActivity, "sizecorrect_" + section.getId()) != null)
@@ -105,7 +110,7 @@ public class FragmentListStudy extends FragmentBase implements ListStudyAdapter.
 
     @Override
     public void OnClick(int indexx) {
-        mainActivity.onOpenFragment(FramentListenWrite.newInstance(section), true);
-//        mainActivity.onOpenFragment(FramentListenWrite.newInstance2(section,kk), true);
+//        mainActivity.onOpenFragment(FramentListenWrite.newInstance(section), true);
+//        mainActivity.onOpenFragment(FramentListenWrite.newInstance2(section,indexx), true);
     }
 }

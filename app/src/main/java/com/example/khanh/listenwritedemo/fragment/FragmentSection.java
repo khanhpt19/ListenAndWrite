@@ -29,6 +29,8 @@ import com.example.khanh.listenwritedemo.request.TaskSection;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -130,6 +132,22 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
         });
     }
 
+    public String readJSONFromAsset() {
+        String json = null;
+        try {
+            InputStream is = mainActivity.getAssets().open("lang.txt");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+    }
+
     private void loadList() {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recycler_view.setLayoutManager(layoutManager);
@@ -178,7 +196,6 @@ public class FragmentSection extends FragmentBase implements SectionAdapter.Call
             ViewDialog viewDialog = new ViewDialog();
             viewDialog.showDialog(mainActivity, "Your device is not connected Internet. Please connect Internet and restart app", 2);
         }
-
     }
 
     public static FragmentSection newInstance(String code) {

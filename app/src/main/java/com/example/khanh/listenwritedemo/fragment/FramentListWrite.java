@@ -18,7 +18,6 @@ public class FramentListWrite extends FragmentBase {
         super.initDataDefault();
 
         Bundle bundle = getArguments();
-        String text= bundle.getString("TEXT");
     }
 
     @Override

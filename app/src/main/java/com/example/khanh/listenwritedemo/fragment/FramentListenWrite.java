@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,13 +20,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.khanh.listenwritedemo.R;
 import com.example.khanh.listenwritedemo.helper.AnimHelper;
 import com.example.khanh.listenwritedemo.adapter.MyFragmentPagerAdapter;
 import com.example.khanh.listenwritedemo.helper.NonSwipeableViewPager;
 import com.example.khanh.listenwritedemo.helper.SharePreferenceUtils;
+import com.example.khanh.listenwritedemo.module.Practice;
 import com.example.khanh.listenwritedemo.module.Section;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -38,7 +39,6 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.khanh.listenwritedemo.R.color.colorOrane;
 
 /**
  * Created by khanh on 7/18/2017.
@@ -69,67 +69,91 @@ public class FramentListenWrite extends FragmentBase {
     private ArrayList<Fragment> listFragment = new ArrayList<>();
 
     SharedPreferences sharedpreferences;
-    public static final int MyPREFERENCES = 0;
-    public static final int MyPREFERENCESSTUDY = 0;
-    int index, dem = 0, dem1 = 0;
+    public static final String SCORE_PREFERENCE = "score";
+    int dem = 0;
     Section section;
     @InjectView(R.id.txtAnswer)
     EditText txtAnswer;
     Handler mHandler = new Handler();
-    int ncorrects = 0, nmistakes = 0, k,h=0;
-
-    List<String> listcorrect = new ArrayList<>();
-    List<String> listmistake = new ArrayList<>();
-
-    List<String> acorrects = new ArrayList<>();
-    List<String> amistakes = new ArrayList<>();
 
     @Override
     protected void initDataDefault() {
         super.initDataDefault();
-
+        sharedpreferences = getContext().getSharedPreferences(SCORE_PREFERENCE, MODE_PRIVATE);
         Bundle bundle = getArguments();
         section = (Section) bundle.getSerializable("SECTION");
-
-        h=bundle.getInt("current");
-
-        index = section.getId();
         toolbar.setTitle(section.getTitle());
         toolbar.setNavigationIcon(R.drawable.ic_left);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToHome();
-//                mainActivity.onBackPressed();
             }
         });
         loadList();
         toolbar.inflateMenu(R.menu.menu_list_add);
-
+        updateScoreStatus();
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                if (SharePreferenceUtils.getString(mainActivity, "sizecorrect_" + index) != null
-                        || SharePreferenceUtils.getString(mainActivity, "sizemistake_" + index) != null)
-                    mainActivity.onOpenFragment(FragmentListStudy.newInstance(section, listcorrect, listmistake, k), true);
+                showDialogStatus();
                 return false;
             }
         });
         progressbar.setMax(section.getPhrases().size());
-        txtNumCorrects.setText("0/" + section.getPhrases().size());
+        // check psda
+        int position = 0;
+        for(int i = 0; i< section.getPhrases().size();i++){
+            if(getScore(section.getPhrases().get(i).getId()) == 0){
+                position = i;
+                break;
+            }
+        }
+        if(position > 0){
+            onSeekingToPractice(position);
+        }
     }
 
+
+    private void updateScoreStatus(){
+        // for per pratice list
+//        int numberCorrect = 0;
+//        for(Practice practice: section.getPhrases()){
+//            numberCorrect += getScore(practice.getId());
+//        }
+//        txtNumCorrects.setText(numberCorrect+ "/" + section.getPhrases().size());
+    }
+
+    private void onSeekingToPractice(int postion){
+        viewpager.setCurrentItem(postion);
+        txtAnswer.setText("");
+        playmedia(postion);
+        btnNext.setText("Done");
+        btnNext.setBackgroundResource(R.drawable.round_rect);
+        txtShowResult.setText("");
+        imgCheck.setVisibility(View.INVISIBLE);
+        progressbar.setProgress(viewpager.getCurrentItem());
+    }
+
+
+    private void showDialogStatus(){
+        AlertDialog.Builder builder= new AlertDialog.Builder(getContext());
+        builder.setTitle("Result");
+
+        builder.show();
+    }
 
     public void goToHome() {
 //        FragmentManager fm = getSupportFragmentManager();
         FragmentManager fm = mainActivity.getSupportFragmentManager();
-        for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+        for (int i = 0; i < fm.getBackStackEntryCount(); ++i) {
             fm.popBackStack();
         }
     }
 
     private void loadList() {
         if (section == null) {
+            mainActivity.onBackPressed();
             return;
         }
         listFragment = new ArrayList<>();
@@ -146,24 +170,13 @@ public class FramentListenWrite extends FragmentBase {
     }
 
     public static FramentListenWrite newInstance(Section section) {
-        FramentListenWrite fragmenT2 = new FramentListenWrite();
+        FramentListenWrite fragment = new FramentListenWrite();
         Bundle bundle = new Bundle();
 
         bundle.putSerializable("SECTION", section);
 
-        fragmenT2.setArguments(bundle);
-        return fragmenT2;
-    }
-
-    public static FramentListenWrite newInstance2(Section section,int k) {
-        FramentListenWrite fragmenT2 = new FramentListenWrite();
-        Bundle bundle = new Bundle();
-
-        bundle.putSerializable("SECTION", section);
-        bundle.putInt("current",k);
-
-        fragmenT2.setArguments(bundle);
-        return fragmenT2;
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Override
@@ -184,15 +197,10 @@ public class FramentListenWrite extends FragmentBase {
 
     @OnClick({R.id.btnNext, R.id.btnHelp, R.id.imgHinh, R.id.txtAnswer, R.id.btnMean})
     public void onClick(View v) {
-//        if(h==0)
-            k = viewpager.getCurrentItem();
-//        else
-//            k=h;
-
         if (v.getId() == R.id.imgHinh) {
-            playmedia(k);
+            playmedia(viewpager.getCurrentItem());
         }
-
+        int k = viewpager.getCurrentItem();
         if (v.getId() == R.id.txtAnswer) {
             showSoftKeyboard(mainActivity, txtAnswer);
         }
@@ -204,7 +212,7 @@ public class FramentListenWrite extends FragmentBase {
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if (isAlive()) {
+                    if (isAlive) {
                         btnHelp.setVisibility(View.VISIBLE);
                         AnimHelper.hideReveal(btnHelp, tvhint, tvhint.getWidth());
                     }
@@ -226,14 +234,15 @@ public class FramentListenWrite extends FragmentBase {
                     imgCheck.setVisibility(View.INVISIBLE);
                     txtShowResult.setText("");
                 }
-            }, 9000);
+            }, 5000);
         }
 
         if (v.getId() == R.id.btnNext) {
             dem++;
             if (dem % 2 == 1) {
                 btnNext.setText("Next");
-                btnNext.setBackgroundResource(R.color.colorGreen);
+                btnNext.setBackgroundResource(R.drawable.round_rect2);
+
                 if ((b.contains(".") || b.contains(",") || b.contains("?") || b.contains(";") || b.contains("!"))) {
                     if (a.length() == 0 || a == "") {
                         mistake(b);
@@ -267,60 +276,23 @@ public class FramentListenWrite extends FragmentBase {
                         }
                     }
                 }
-                runthread();
+                updateScoreStatus();
             } else {
-                viewpager.setCurrentItem(k + 1);
-                txtAnswer.setText("");
-                playmedia(k + 1);
-                btnNext.setText("Done");
-                btnNext.setBackgroundResource(colorOrane);
-                txtShowResult.setText("");
-                imgCheck.setVisibility(View.INVISIBLE);
-                dem1++;
+                onSeekingToPractice(k+1);
             }
 
             if (k == section.getPhrases().size() - 1) {
-                mainActivity.onOpenFragment(FragmentResult.newInstance(acorrects, amistakes), true);
-                sharepref();
+                showDialogStatus();
             }
-            SharePreferenceUtils.setString(mainActivity, "correct_" + section.getId(), String.valueOf(ncorrects));
         }
     }
 
     public void correct(String b1) {
         MediaPlayer mp = MediaPlayer.create(mainActivity, R.raw.right);
         mp.start();
-        ncorrects++;
-        acorrects.add(b1);
-
-        listmistake = new Gson().fromJson(SharePreferenceUtils.getString(getContext(), "listmistake_" + section.getId()), new TypeToken<ArrayList<String>>() {
-        }.getType());
-        listcorrect = new Gson().fromJson(SharePreferenceUtils.getString(getContext(), "listcorrect_" + section.getId()), new TypeToken<ArrayList<String>>() {
-        }.getType());
-        List<String> correct2 = new ArrayList<>();
-        List<String> mistake2 = new ArrayList<>();
-        try {
-            for (int i = 0; i < listcorrect.size(); i++) {
-                if (!listcorrect.get(i).equals(b1)) {
-                    correct2.add(listcorrect.get(i));
-                }
-            }
-            for (int i = 0; i < listmistake.size(); i++) {
-                if (!listmistake.get(i).equals(b1)) {
-                    mistake2.add(listmistake.get(i));
-                }
-            }
-        } catch (Exception e) {
-        }
-        correct2.add(b1);
-        SharePreferenceUtils.setString(mainActivity,"kk_"+section.getId(),String.valueOf(k));
-        SharePreferenceUtils.setString(mainActivity, "sizecorrect_" + section.getId(), correct2.size() + "");
-        SharePreferenceUtils.setString(mainActivity, "listmistake_" + section.getId(), new Gson().toJson(mistake2));
-        SharePreferenceUtils.setString(mainActivity, "listcorrect_" + section.getId(), new Gson().toJson(correct2));
-
         imgCheck.setVisibility(View.VISIBLE);
         imgCheck.setImageResource(R.drawable.ic_done);
-        txtShowResult.setText(section.getPhrases().get(k).getText().toString());
+        txtShowResult.setText(section.getPhrases().get(viewpager.getCurrentItem()).getText().toString());
         txtShowResult.setTextColor(getResources().getColor(R.color.colorGreen));
         mHandler.postDelayed(new Runnable() {
             @Override
@@ -328,45 +300,17 @@ public class FramentListenWrite extends FragmentBase {
                 imgCheck.setVisibility(View.INVISIBLE);
                 txtShowResult.setText("");
             }
-        }, 20000);
-
+        }, 10000);
+        setScore(section.getPhrases().get(viewpager.getCurrentItem()).getId(), 1);
     }
 
     public void mistake(String b1) {
         MediaPlayer mp = MediaPlayer.create(mainActivity, R.raw.wrong);
         mp.start();
-        nmistakes++;
-        amistakes.add(b1);
-
-        listmistake = new Gson().fromJson(SharePreferenceUtils.getString(getContext(), "listmistake_" + section.getId()), new TypeToken<ArrayList<String>>() {
-        }.getType());
-        listcorrect = new Gson().fromJson(SharePreferenceUtils.getString(getContext(), "listcorrect_" + section.getId()), new TypeToken<ArrayList<String>>() {
-        }.getType());
-
-        List<String> correct2 = new ArrayList<>();
-        List<String> mistake2 = new ArrayList<>();
-        try {
-            for (int i = 0; i < listcorrect.size(); i++) {
-                if (!listcorrect.get(i).equals(b1)) {
-                    correct2.add(listcorrect.get(i));
-                }
-            }
-            for (int i = 0; i < listmistake.size(); i++) {
-                if (!listmistake.get(i).equals(b1)) {
-                    mistake2.add(listmistake.get(i));
-                }
-            }
-        } catch (Exception e) {
-        }
-        mistake2.add(b1);
-        SharePreferenceUtils.setString(mainActivity,"kk_"+section.getId(),String.valueOf(k));
-        SharePreferenceUtils.setString(mainActivity, "sizemistake_" + section.getId(), mistake2.size() + "");
-        SharePreferenceUtils.setString(mainActivity, "listmistake_" + section.getId(), new Gson().toJson(mistake2));
-        SharePreferenceUtils.setString(mainActivity, "listcorrect_" + section.getId(), new Gson().toJson(correct2));
 
         imgCheck.setVisibility(View.VISIBLE);
         imgCheck.setImageResource(R.drawable.ic_clear);
-        txtShowResult.setText(section.getPhrases().get(k).getText().toString());
+        txtShowResult.setText(section.getPhrases().get(viewpager.getCurrentItem()).getText().toString());
         txtShowResult.setTextColor(getResources().getColor(R.color.colorRed));
         mHandler.postDelayed(new Runnable() {
             @Override
@@ -374,27 +318,8 @@ public class FramentListenWrite extends FragmentBase {
                 imgCheck.setVisibility(View.INVISIBLE);
                 txtShowResult.setText("");
             }
-        }, 20000);
-    }
-
-    public void runthread() {
-        new Thread(new Runnable() {
-            public void run() {
-                while (ncorrects < section.getPhrases().size()) {
-                    mHandler.post(new Runnable() {
-                        public void run() {
-                            progressbar.setProgress(ncorrects + nmistakes);
-                            txtNumCorrects.setText((ncorrects) + "/" + section.getPhrases().size());
-                        }
-                    });
-                    try {
-                        Thread.sleep(50);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
+        }, 10000);
+        setScore(section.getPhrases().get(viewpager.getCurrentItem()).getId(), -1);
     }
 
     public void playmedia(int kb) {
@@ -418,15 +343,14 @@ public class FramentListenWrite extends FragmentBase {
         }
     }
 
-    public void sharepref() {
-        sharedpreferences = getContext().getSharedPreferences(String.valueOf(MyPREFERENCES), MODE_PRIVATE);
+    private void setScore(int practiceId, int score){
         SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putInt("index", index);
-        editor.putInt("corrects_" + index, ncorrects);
-        editor.commit();
+        editor.putInt("score_" + section.getId() + "_" + practiceId, score);
+        editor.apply();
     }
 
-    private boolean isAlive() {
-        return getActivity() != null;
+    private int getScore(int practiceId){
+        return sharedpreferences.getInt("score_" + section.getId() + "_" + practiceId, 0);
     }
+
 }

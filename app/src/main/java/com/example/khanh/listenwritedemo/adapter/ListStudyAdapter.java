@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.logging.Level;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.khanh.listenwritedemo.fragment.FramentListenWrite.MyPREFERENCESSTUDY;
 
 
 /**

@@ -29,7 +29,6 @@ public class FragmentResult extends FragmentBase {
     private ResultAdapter mAdapter;
     private ResultAdapter2 mAdapter2;
 
-
     @Override
     protected void initDataDefault() {
         super.initDataDefault();
@@ -43,7 +42,6 @@ public class FragmentResult extends FragmentBase {
                 mainActivity.onOpenFragment(FragmentSection.newInstance2(),true);
             }
         });
-
 
         List<String> correct = bundle.getStringArrayList("correct");
         List<String> mistakes = bundle.getStringArrayList("mistakes");
@@ -59,7 +57,6 @@ public class FragmentResult extends FragmentBase {
         mAdapter2 = new ResultAdapter2(mistakes);
         rv2.setAdapter(mAdapter2);
         mAdapter2.notifyDataSetChanged();
-
     }
 
     @Override
@@ -68,7 +65,6 @@ public class FragmentResult extends FragmentBase {
     }
 
     public static FragmentResult newInstance(List<String> a, List<String> b) {
-
         FragmentResult fragmentResult = new FragmentResult();
         Bundle bundle = new Bundle();
 

@@ -3,6 +3,7 @@ package com.example.khanh.listenwritedemo.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ public abstract class FragmentBase extends Fragment {
 
     private boolean savedWhenInStackFlag = false;
     private Bundle bundleSavedWhenInStack;
+    protected Boolean isAlive;
+
 
     private boolean restoreFromBackStackFlag = false;
 
@@ -130,5 +133,23 @@ public abstract class FragmentBase extends Fragment {
         } catch (Exception e) {
             //AnalyticsSender.onException(e);
         }
+    }
+    public void log(String text1,String text2){
+        try {
+            Log.d(text1,text2);
+        } catch (Exception e) {
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        isAlive=true;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        isAlive=false;
     }
 }

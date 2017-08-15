@@ -44,15 +44,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp"
-        android:background="@android:color/white"
+        android:background="#FFFFFF"
         android:gravity="center"
         app:cardCornerRadius="@dimen/cardview_radius_large"
         app:cardElevation="6dp"
+        app:cardBackgroundColor="@color/colorWhite"
         app:cardMaxElevation="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/colorWhite"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -103,8 +105,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_marginRight="45dp"
                     android:layout_weight="1"
+                    android:layout_marginRight="30dp"
                     app:rb_color="@color/colorBlue"
                     app:rb_duration="1000"
                     app:rb_radius="10dp"
